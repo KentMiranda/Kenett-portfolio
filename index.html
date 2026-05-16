@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- ============================================================
+    PAGE TITLE & META — update these for SEO / browser tab
+  ============================================================ -->
+  <title>Kenett Fernandez — Portfolio</title>
+  <meta name="description" content="Video editor, photographer, and web developer based in PH." />
+  <meta name="author" content="Kenett Fernandez" />
+
+  <!-- Open Graph (for link previews on Discord, iMessage, etc.)
+       Replace the image path with a nice preview photo of yours -->
+  <meta property="og:title" content="Kenett Fernandez — Portfolio" />
+  <meta property="og:description" content="Video editor, photographer, and web developer." />
+  <meta property="og:image" content="assets/images/og-preview.jpg" /> <!-- 📸 YOUR PREVIEW IMAGE -->
+  <meta property="og:url" content="https://yoursite.com" /> <!-- 🔗 YOUR LIVE URL -->
+
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <!-- ============================================================
+    FAVICON — drop your favicon.ico into the root folder
+  ============================================================ -->
+  <!-- <link rel="icon" href="favicon.ico" /> -->
+</head>
+<body>
+
+  <!-- ============================================================
+    NAVIGATION
+    - Update nav links if you add/remove sections
+  ============================================================ -->
+  <nav>
+    <div class="wrap nav-inner">
+      <div class="nav-logo">KF_PORTFOLIO.exe</div>
+      <div class="nav-links">
+        <a href="#about">about</a>
+        <a href="#work">work</a>
+        <a href="#contact">contact</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ============================================================
+    HERO SECTION
+    - Update your name, title, tags, and availability status
+  ============================================================ -->
+  <section class="hero">
+    <div class="wrap">
+
+      <div class="hero-label">Portfolio — 2025</div>
+
+      <!-- YOUR NAME -->
+      <h1 class="hero-name">Kenett<br><span class="accent">Fernandez</span><span class="cursor"></span></h1>
+
+      <!-- YOUR TITLE / ONE-LINER -->
+      <p class="hero-sub">/ video editor — photographer — web developer /</p>
+
+      <!-- YOUR SKILL TAGS — add or remove <span> tags freely -->
+      <div class="hero-tags">
+        <span class="tag">Cinematography</span>
+        <span class="tag">Photography</span>
+        <span class="tag">Web Dev</span>
+        <span class="tag">UI / UX</span>
+        <span class="tag">Post-Production</span>
+      </div>
+
+      <!-- AVAILABILITY STATUS — change text or remove the dot if not available -->
+      <div class="status-line">
+        <span class="status-dot"></span>
+        <span>Available for freelance work</span>
+        <span class="divider">//</span>
+        <span>Based in PH</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+    ABOUT SECTION
+    - Update your bio paragraphs and stat numbers
+  ============================================================ -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <span class="section-title">About</span>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="about-grid">
+
+        <!-- YOUR BIO — write 2–3 short paragraphs -->
+        <div class="about-text">
+          <p>I'm Kenett — a visual storyteller and developer who blurs the line between creative craft and technical precision. I shoot, cut, and code.</p>
+          <p>Whether it's a cinematic short, a moody portrait series, or a pixel-perfect web interface, I bring the same obsessive attention to detail to every project.</p>
+          <p>Currently exploring the intersection of motion, design, and interactive digital experiences.</p>
+        </div>
+
+        <!-- YOUR STATS — update numbers to match your actual experience -->
+        <div class="about-stats">
+          <div class="stat-cell">
+            <div class="stat-num">3+</div>
+            <div class="stat-label">Years editing</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">50+</div>
+            <div class="stat-label">Photos shot</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">12+</div>
+            <div class="stat-label">Web projects</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">Ideas brewing</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+    WORK SECTION
+    - Two groups: Creative Projects + Dev Work
+    - Each group has tabs
+    - Add/remove .project-card blocks to add your real projects
+  ============================================================ -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <span class="section-title">Work</span>
+        <div class="section-line"></div>
+      </div>
+
+      <!-- ── CREATIVE PROJECTS ─────────────────────────────── -->
+      <div class="work-group">
+        <div class="group-label">// Creative Projects</div>
+
+        <div class="tabs" id="creative-tabs">
+          <button class="tab-btn active" data-group="creative" data-tab="photography">Photography</button>
+          <button class="tab-btn"        data-group="creative" data-tab="video">Video Editing</button>
+        </div>
+
+        <!-- PHOTOGRAPHY TAB -->
+        <div class="tab-panel active" id="tab-photography">
+          <div class="project-grid">
+
+            <!-- ══════════════════════════════════════════════════
+              📸 PHOTOGRAPHY PROJECT CARD
+              - title: name of the project/series
+              - desc: 1–2 sentence description
+              - tools: camera, software, style tags
+              - link: optional — wrap card in <a href="..."> for a clickable project
+            ══════════════════════════════════════════════════ -->
+            <div class="project-card">
+              <div class="card-meta">
+                <span class="card-type">Photography</span>
+                <span class="card-year">2025</span>
+              </div>
+              <div class="card-title">Urban Geometry</div>
+              <div class="card-desc">A series exploring architectural patterns and the abstract beauty of city structures in monochrome.</div>
+              <!-- 📸 THUMBNAIL — replace src with your actual image path e.g. assets/images/urban-geometry-thumb.jpg -->
+              <!-- <img class="card-thumb" src="assets/images/urban-geometry-thumb.jpg" alt="Urban Geometry" /> -->
+              <div class="card-tools">
+                <span class="tool-chip">Sony A7IV</span>
+                <span class="tool-chip">Lightroom</span>
+                <span class="tool-chip">Monochrome</span>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="card-meta">
+                <span class="card-type">Photography</span>
+                <span class="card-year">2024</span>
+              </div>
+              <div class="card-title">Golden Hour Portraits</div>
+              <div class="card-desc">Candid and posed portraits capturing the warmth of natural golden-hour light on location.</div>
+              <!-- <img class="card-thumb" src="assets/images/golden-hour-thumb.jpg" alt="Golden Hour Portraits" /> -->
+              <div class="card-tools">
+                <span class="tool-chip">Portrait</span>
+                <span class="tool-chip">Natural Light</span>
+                <span class="tool-chip">Capture One</span>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="card-meta">
+                <span class="card-type">Photography</span>
+                <span class="card-year">2024</span>
+              </div>
+              <div class="card-title">Street Flux</div>
+              <div class="card-desc">A documentary-style street photography project capturing everyday moments in the metro.</div>
+              <!-- <img class="card-thumb" src="assets/images/street-flux-thumb.jpg" alt="Street Flux" /> -->
+              <div class="card-tools">
+                <span class="tool-chip">Street</span>
+                <span class="tool-chip">35mm</span>
+                <span class="tool-chip">Photoshop</span>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="card-meta">
+                <span class="card-type">Photography</span>
+                <span class="card-year">2023</span>
+              </div>
+              <div class="card-title">Still Life Studies</div>
+              <div class="card-desc">Minimalist product and object photography with controlled studio lighting and clean compositions.</div>
+              <!-- <img class="card-thumb" src="assets/images/still-life-thumb.jpg" alt="Still Life Studies" /> -->
+              <div class="card-tools">
+                <span class="tool-chip">Studio</span>
+                <span class="tool-chip">Product</span>
+                <span class="tool-chip">Strobes</span>
+              </div>
+            </div>
+
+            <!-- ══ ADD MORE PHOTOGRAPHY CARDS HERE ══
+            <div class="project-card">
+              <div class="card-meta">
+                <span class="card-type">Photography</span>
+                <span class="card-year">YEAR</span>
+              </div>
+              <div class="card-title">Your Project Title</div>
+              <div class="card-desc">Your description here.</div>
+              <img class="card-thumb" src="assets/images/your-thumb.jpg" alt="Project Name" />
+              <div class="card-tools">
+                <span class="tool-chip">Tool</span>
+              </div>
+            </div>
+            -->
+
+          </div>
+        </div><!-- /tab-photography -->
+
+
+        <!-- VIDEO EDITING TAB -->
+        <div class="tab-panel" id="tab-video">
+          <div class="project-grid">
+
+            <!-- ══════════════════════════════════════════════════
+              🎬 VIDEO PROJECT CARD
+              - For video previews, you can embed a YouTube/Vimeo link
+                by uncommenting the <iframe> block below
+              - Or use a thumbnail image with a play icon overlay
+            ══════════════════════════════════════════════════ -->
+            <div class="project-card">
+              <div class="card-meta">
+                <span class="card-type">Video</span>
+                <span class="card-year">2025</span>
+              </div>
+              <div class="card-title">City After Dark</div>
+              <div class="card-desc">A cinematic short film exploring urban nightlife with colour-graded footage and ambient sound design.</div>
+
+              <!-- 🎬 VIDEO EMBED OPTION 1: YouTube iframe
+                   Replace VIDEO_ID with your actual YouTube video ID
+              <div class="card-video">
+                <iframe
+                  src="https://www.youtube.com/embed/VIDEO_ID"
+                  title="City After Dark"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+                </iframe>
+              </div> -->
+
+              <!-- 🎬 VIDEO EMBED OPTION 2: Vimeo iframe
+              <div class="card-video">
+                <iframe
+                  src="https://player.vimeo.com/video/VIDEO_ID"
+                  title="City After Dark"
+                  frameborder="0"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowfullscreen>
+                </iframe>
+              </div> -->
+
+              <!-- 🎬 VIDEO EMBED OPTION 3: Thumbnail image + play button
+              <div class="card-video-thumb">
+                <img src="assets/images/city-after-dark-thumb.jpg" alt="City After Dark" />
+                <a href="https://youtube.com/watch?v=VIDEO_ID" target="_blank" class="play-btn">▶</a>
+              </div> -->
+
+              <div class="card-tools">
+                <span class="tool-chip">Premiere Pro</span>
+                <span class="tool-chip">DaVinci</span>
+                <span class="tool-chip">Cinematic</span>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="card-meta">
+                <span class="card-type">Video</span>
+                <span class="card-year">2024</span>
+              </div>
+              <div class="card-title">Brand Reel — Local Café</div>
+              <div class="card-desc">A 60-second promotional video for a local café, showcasing product and atmosphere with a warm grade.</div>
+              <div class="card-tools">
+                <span class="tool-chip">After Effects</span>
+                <span class="tool-chip">Motion Graphics</span>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="card-meta">
+                <span class="card-type">Video</span>
+                <span class="card-year">2024</span>
+              </div>
+              <div class="card-title">Event Highlights — Music Fest</div>
+              <div class="card-desc">Fast-paced event recap with sync-cut editing, color work, and transitions timed to the music.</div>
+              <div class="card-tools">
+                <span class="tool-chip">Premiere Pro</span>
+                <span class="tool-chip">Sync Cut</span>
+                <span class="tool-chip">Color Grade</span>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="card-meta">
+                <span class="card-type">Video</span>
+                <span class="card-year">2023</span>
+              </div>
+              <div class="card-title">Travel Montage — SEA</div>
+              <div class="card-desc">A personal travel video montage spanning Southeast Asia, shot on multiple formats and edited for mood.</div>
+              <div class="card-tools">
+                <span class="tool-chip">DaVinci</span>
+                <span class="tool-chip">GoPro</span>
+                <span class="tool-chip">Drone</span>
+              </div>
+            </div>
+
+            <!-- ══ ADD MORE VIDEO CARDS HERE ══ -->
+
+          </div>
+        </div><!-- /tab-video -->
+
+      </div><!-- /creative work-group -->
+
+
+      <!-- ── DEV WORK ───────────────────────────────────────── -->
+      <div class="work-group">
+        <div class="group-label accent2">// Dev Work</div>
+
+        <div class="tabs" id="dev-tabs">
+          <button class="tab-btn active" data-group="dev" data-tab="webdev">Web Dev</button>
+          <button class="tab-btn"        data-group="dev" data-tab="uiux">UI / UX</button>
+        </div>
+
+        <!-- WEB DEV TAB -->
+        <div class="tab-panel active" id="tab-webdev">
+          <div class="project-grid">
+
+            <!-- ══════════════════════════════════════════════════
+              💻 WEB DEV PROJECT CARD
+              - Add a live URL or GitHub link via data-link attribute
+                or wrap the card in an <a href="..."> tag
+              - Screenshots go in assets/images/
+            ══════════════════════════════════════════════════ -->
+            <div class="project-card dev">
+              <div class="card-meta">
+                <span class="card-type accent2">Web Dev</span>
+                <span class="card-year">2025</span>
+              </div>
+              <div class="card-title">This Portfolio</div>
+              <div class="card-desc">Built from scratch with vanilla HTML, CSS, and JS. ASCII-inspired, minimal, dark — fully responsive.</div>
+              <!-- 💻 SCREENSHOT — uncomment and update path
+              <img class="card-thumb" src="assets/images/portfolio-screenshot.jpg" alt="Portfolio" /> -->
+              <!-- 🔗 PROJECT LINKS — uncomment and update
+              <div class="card-links">
+                <a href="https://yoursite.com" target="_blank" class="card-link">Live ↗</a>
+                <a href="https://github.com/kenettf/portfolio" target="_blank" class="card-link">GitHub ↗</a>
+              </div> -->
+              <div class="card-tools">
+                <span class="tool-chip">HTML</span>
+                <span class="tool-chip">CSS</span>
+                <span class="tool-chip">JavaScript</span>
+              </div>
+            </div>
+
+            <div class="project-card dev">
+              <div class="card-meta">
+                <span class="card-type accent2">Web Dev</span>
+                <span class="card-year">2024</span>
+              </div>
+              <div class="card-title">Photography Booking App</div>
+              <div class="card-desc">A client-facing booking system for photography sessions with calendar integration and form flows.</div>
+              <div class="card-tools">
+                <span class="tool-chip">React</span>
+                <span class="tool-chip">Node.js</span>
+                <span class="tool-chip">Tailwind</span>
+              </div>
+            </div>
+
+            <div class="project-card dev">
+              <div class="card-meta">
+                <span class="card-type accent2">Web Dev</span>
+                <span class="card-year">2024</span>
+              </div>
+              <div class="card-title">Video Agency Landing Page</div>
+              <div class="card-desc">High-converting landing page for a video production agency with animations and scroll effects.</div>
+              <div class="card-tools">
+                <span class="tool-chip">Next.js</span>
+                <span class="tool-chip">GSAP</span>
+                <span class="tool-chip">Framer</span>
+              </div>
+            </div>
+
+            <div class="project-card dev">
+              <div class="card-meta">
+                <span class="card-type accent2">Web Dev</span>
+                <span class="card-year">2023</span>
+              </div>
+              <div class="card-title">Local Biz Dashboard</div>
+              <div class="card-desc">Admin dashboard for a small business to track orders, inventory, and sales data visualizations.</div>
+              <div class="card-tools">
+                <span class="tool-chip">React</span>
+                <span class="tool-chip">Chart.js</span>
+                <span class="tool-chip">Firebase</span>
+              </div>
+            </div>
+
+            <!-- ══ ADD MORE WEB DEV CARDS HERE ══ -->
+
+          </div>
+        </div><!-- /tab-webdev -->
+
+
+        <!-- UI/UX TAB -->
+        <div class="tab-panel" id="tab-uiux">
+          <div class="project-grid">
+
+            <!-- ══════════════════════════════════════════════════
+              🎨 UI/UX PROJECT CARD
+              - Add Figma embed or prototype link
+              - Screenshots of your Figma files go in assets/images/
+            ══════════════════════════════════════════════════ -->
+            <div class="project-card dev">
+              <div class="card-meta">
+                <span class="card-type accent2">UI / UX</span>
+                <span class="card-year">2025</span>
+              </div>
+              <div class="card-title">Creative Studio App Design</div>
+              <div class="card-desc">End-to-end Figma design for a creative freelancer app — wireframes to polished component library.</div>
+              <!-- 🎨 FIGMA EMBED — uncomment and paste your Figma embed link
+              <div class="card-video">
+                <iframe
+                  style="border: 1px solid rgba(0, 0, 0, 0.1);"
+                  src="https://www.figma.com/embed?embed_host=share&url=YOUR_FIGMA_LINK"
+                  allowfullscreen>
+                </iframe>
+              </div> -->
+              <div class="card-tools">
+                <span class="tool-chip">Figma</span>
+                <span class="tool-chip">Prototyping</span>
+                <span class="tool-chip">Design System</span>
+              </div>
+            </div>
+
+            <div class="project-card dev">
+              <div class="card-meta">
+                <span class="card-type accent2">UI / UX</span>
+                <span class="card-year">2024</span>
+              </div>
+              <div class="card-title">E-Commerce UX Redesign</div>
+              <div class="card-desc">UX audit and redesign of a local e-commerce store's checkout flow, improving conversion and clarity.</div>
+              <div class="card-tools">
+                <span class="tool-chip">Figma</span>
+                <span class="tool-chip">User Research</span>
+                <span class="tool-chip">A/B Testing</span>
+              </div>
+            </div>
+
+            <div class="project-card dev">
+              <div class="card-meta">
+                <span class="card-type accent2">UI / UX</span>
+                <span class="card-year">2024</span>
+              </div>
+              <div class="card-title">Mobile Portfolio Concept</div>
+              <div class="card-desc">A swipe-based mobile UI concept for showcasing creative portfolios with gesture-first navigation.</div>
+              <div class="card-tools">
+                <span class="tool-chip">Figma</span>
+                <span class="tool-chip">Mobile-First</span>
+                <span class="tool-chip">Interaction Design</span>
+              </div>
+            </div>
+
+            <div class="project-card dev">
+              <div class="card-meta">
+                <span class="card-type accent2">UI / UX</span>
+                <span class="card-year">2023</span>
+              </div>
+              <div class="card-title">Brand Identity System</div>
+              <div class="card-desc">Complete visual identity and style guide for a local clothing brand, including typography and color system.</div>
+              <div class="card-tools">
+                <span class="tool-chip">Illustrator</span>
+                <span class="tool-chip">Brand Design</span>
+                <span class="tool-chip">Typography</span>
+              </div>
+            </div>
+
+            <!-- ══ ADD MORE UI/UX CARDS HERE ══ -->
+
+          </div>
+        </div><!-- /tab-uiux -->
+
+      </div><!-- /dev work-group -->
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+    CONTACT SECTION
+    - Update all your real links below
+  ============================================================ -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <span class="section-title">Contact</span>
+        <div class="section-line"></div>
+      </div>
+
+      <p class="contact-intro">
+        Open to collaboration, freelance projects, and new creative ventures.<br>
+        Let's make something worth looking at.
+      </p>
+
+      <!-- 📬 UPDATE ALL LINKS BELOW WITH YOUR REAL ONES -->
+      <a class="contact-row" href="mailto:kenett@email.com">
+        <span class="contact-key">email</span>
+        <span>kenett@email.com</span>  <!-- ✏️ your email -->
+        <span class="contact-arrow">↗</span>
+      </a>
+
+      <a class="contact-row" href="https://instagram.com/kenettfernandez" target="_blank">
+        <span class="contact-key">instagram</span>
+        <span>@kenettfernandez</span>  <!-- ✏️ your IG handle -->
+        <span class="contact-arrow">↗</span>
+      </a>
+
+      <a class="contact-row" href="https://github.com/kenettf" target="_blank">
+        <span class="contact-key">github</span>
+        <span>github.com/kenettf</span>  <!-- ✏️ your GitHub -->
+        <span class="contact-arrow">↗</span>
+      </a>
+
+      <a class="contact-row" href="https://linkedin.com/in/kenettfernandez" target="_blank">
+        <span class="contact-key">linkedin</span>
+        <span>linkedin.com/in/kenettfernandez</span>  <!-- ✏️ your LinkedIn -->
+        <span class="contact-arrow">↗</span>
+      </a>
+
+      <!-- ══ ADD MORE CONTACT ROWS HERE (YouTube, Behance, etc.) ══
+      <a class="contact-row" href="https://youtube.com/@yourchannel" target="_blank">
+        <span class="contact-key">youtube</span>
+        <span>youtube.com/@yourchannel</span>
+        <span class="contact-arrow">↗</span>
+      </a>
+      -->
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+    FOOTER
+  ============================================================ -->
+  <div class="wrap">
+    <div class="ascii-divider">────────────────────────────────────────────────────────────────────────────────────────────────</div>
+    <footer>
+      <span>© 2025 Kenett Fernandez</span>
+      <span class="footer-code">// built_with: html + css + js //</span>
+      <span>KF_v1.0</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

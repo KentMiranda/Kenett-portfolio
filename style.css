@@ -1,0 +1,780 @@
+/* ================================================================
+   KENETT FERNANDEZ — PORTFOLIO STYLESHEET
+   style.css
+
+   TABLE OF CONTENTS:
+   1.  CSS Variables (colors, fonts — change your theme here)
+   2.  Reset & Base
+   3.  Noise Overlay
+   4.  Layout Utilities
+   5.  Navigation
+   6.  Hero Section
+   7.  Section Shared Styles
+   8.  About Section
+   9.  Work Section — Tabs
+   10. Project Cards
+   11. Contact Section
+   12. Footer
+   13. Animations & Keyframes
+   14. Media Queries (mobile)
+================================================================ */
+
+
+/* ================================================================
+   1. CSS VARIABLES — tweak your theme here
+================================================================ */
+:root {
+  /* Colors */
+  --bg:         #0a0a0a;       /* page background */
+  --surface:    #111111;       /* card / surface background */
+  --border:     #222222;       /* grid lines, dividers */
+  --accent:     #c8ff00;       /* lime — creative projects highlight */
+  --accent2:    #00ffc8;       /* cyan — dev work highlight */
+  --text:       #e8e8e8;       /* primary text */
+  --muted:      #666666;       /* secondary / dimmed text */
+
+  /* Typography */
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', sans-serif;
+
+  /* Spacing */
+  --section-pad: 4rem;
+  --card-pad:    1.8rem;
+  --max-width:   900px;
+}
+
+
+/* ================================================================
+   2. RESET & BASE
+================================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+iframe {
+  width: 100%;
+  display: block;
+}
+
+
+/* ================================================================
+   3. NOISE OVERLAY — subtle film grain texture over the whole page
+================================================================ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+
+/* ================================================================
+   4. LAYOUT UTILITIES
+================================================================ */
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.accent  { color: var(--accent); }
+.accent2 { color: var(--accent2); }
+
+
+/* ================================================================
+   5. NAVIGATION
+================================================================ */
+nav {
+  border-bottom: 1px solid var(--border);
+  padding: 1.2rem 0;
+  position: sticky;
+  top: 0;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+
+/* ================================================================
+   6. HERO SECTION
+================================================================ */
+.hero {
+  padding: 6rem 0 5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  animation: fadeUp 0.5s ease both;
+  animation-delay: 0.05s;
+}
+
+.hero-label::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--muted);
+}
+
+.hero-name {
+  font-family: var(--mono);
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+  animation: fadeUp 0.5s ease both;
+  animation-delay: 0.15s;
+}
+
+.hero-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  font-family: var(--sans);
+  animation: fadeUp 0.5s ease both;
+  animation-delay: 0.2s;
+}
+
+/* Skill tags in hero */
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 3rem;
+  animation: fadeUp 0.5s ease both;
+  animation-delay: 0.25s;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: border-color 0.2s, color 0.2s;
+  cursor: default;
+}
+
+.tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* "Available for work" status line */
+.status-line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  animation: fadeUp 0.5s ease both;
+  animation-delay: 0.3s;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: pulse 2s infinite;
+}
+
+.divider {
+  color: #2a2a2a;
+}
+
+/* Blinking cursor after name */
+.cursor::after {
+  content: '█';
+  color: var(--accent);
+  animation: blink 1.1s step-end infinite;
+}
+
+
+/* ================================================================
+   7. SECTION SHARED STYLES
+================================================================ */
+.section {
+  padding: var(--section-pad) 0;
+}
+
+.section + .section {
+  border-top: 1px solid var(--border);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-num {
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.section-title {
+  font-size: 13px;
+  color: var(--text);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+
+/* ================================================================
+   8. ABOUT SECTION
+================================================================ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.about-text {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.9;
+  font-family: var(--sans);
+  font-weight: 300;
+}
+
+.about-text p {
+  margin-bottom: 1rem;
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Stats grid (2×2) */
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border); /* border-collapse trick using gap */
+}
+
+.stat-cell {
+  background: var(--bg);
+  padding: 1.4rem;
+}
+
+.stat-num {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.stat-label {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+
+/* ================================================================
+   9. WORK SECTION — TABS
+================================================================ */
+.work-group {
+  margin-bottom: 3.5rem;
+}
+
+.work-group:last-child {
+  margin-bottom: 0;
+}
+
+.group-label {
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+/* Tab bar */
+.tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  padding: 0.75rem 1.4rem;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.tab-btn::before {
+  content: '> ';
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.tab-btn.active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+.tab-btn.active::before {
+  opacity: 1;
+}
+
+.tab-btn:hover {
+  color: var(--text);
+}
+
+/* Tab panels — hidden by default, shown when .active */
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+  animation: fadeUp 0.3s ease both;
+}
+
+
+/* ================================================================
+   10. PROJECT CARDS
+================================================================ */
+
+/* 2-column grid with 1px gap acting as borders */
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+
+.project-card {
+  background: var(--bg);
+  padding: var(--card-pad);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+  cursor: default;
+}
+
+/* Left accent bar on hover */
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 0;
+  background: var(--accent);
+  transition: height 0.35s ease;
+}
+
+.project-card.dev::before {
+  background: var(--accent2); /* cyan for dev cards */
+}
+
+.project-card:hover {
+  background: #0f0f0f;
+}
+
+.project-card:hover::before {
+  height: 100%;
+}
+
+/* Card top row: type label + year */
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.card-type {
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.card-year {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.card-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.75;
+  font-family: var(--sans);
+  font-weight: 300;
+}
+
+/* Thumbnail image inside a card
+   Uncomment <img class="card-thumb"> in HTML to use */
+.card-thumb {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  margin: 1rem 0;
+  filter: grayscale(20%);
+  transition: filter 0.3s;
+}
+
+.project-card:hover .card-thumb {
+  filter: grayscale(0%);
+}
+
+/* Video embed container (YouTube / Vimeo / Figma iframes)
+   Uncomment <div class="card-video"> in HTML to use */
+.card-video {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.card-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Video thumbnail with play button overlay
+   Uncomment <div class="card-video-thumb"> in HTML to use */
+.card-video-thumb {
+  position: relative;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+
+.card-video-thumb img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--border);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.play-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #000;
+}
+
+/* Tool chips row */
+.card-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.tool-chip {
+  font-size: 10px;
+  padding: 2px 8px;
+  border: 1px solid #1e1e1e;
+  color: #444;
+  letter-spacing: 0.08em;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.project-card:hover .tool-chip {
+  border-color: #2a2a2a;
+  color: #555;
+}
+
+/* Live / GitHub links row
+   Uncomment <div class="card-links"> in HTML to use */
+.card-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card-link {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  transition: color 0.2s;
+}
+
+.card-link:hover {
+  color: var(--accent);
+}
+
+
+/* ================================================================
+   11. CONTACT SECTION
+================================================================ */
+.contact-intro {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.9;
+  font-family: var(--sans);
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+  text-decoration: none;
+}
+
+.contact-row:hover {
+  color: var(--text);
+}
+
+.contact-row:hover .contact-arrow {
+  color: var(--accent);
+}
+
+.contact-key {
+  color: var(--accent);
+  width: 80px;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.contact-arrow {
+  margin-left: auto;
+  transition: color 0.2s;
+}
+
+
+/* ================================================================
+   12. FOOTER
+================================================================ */
+.ascii-divider {
+  font-size: 10px;
+  color: #1e1e1e;
+  overflow: hidden;
+  white-space: nowrap;
+  letter-spacing: 0;
+  user-select: none;
+  margin: 1rem 0 0;
+}
+
+footer {
+  padding: 1.5rem 0 2rem;
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  letter-spacing: 0.05em;
+}
+
+.footer-code {
+  color: #2a2a2a;
+}
+
+
+/* ================================================================
+   13. ANIMATIONS & KEYFRAMES
+================================================================ */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.25; }
+}
+
+
+/* ================================================================
+   14. MEDIA QUERIES — mobile / small screens
+================================================================ */
+@media (max-width: 640px) {
+  :root {
+    --section-pad: 3rem;
+    --card-pad: 1.2rem;
+  }
+
+  .wrap {
+    padding: 0 1.25rem;
+  }
+
+  /* Stack project grid to 1 column */
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stack about grid to 1 column */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Smaller hero name */
+  .hero-name {
+    font-size: 2.2rem;
+  }
+
+  /* Nav links: tighten gap */
+  .nav-links {
+    gap: 1.2rem;
+  }
+
+  /* Footer: stack vertically */
+  footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .footer-code {
+    display: none; /* hide code comment on mobile */
+  }
+
+  .status-line {
+    flex-wrap: wrap;
+  }
+}
