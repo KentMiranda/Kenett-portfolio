@@ -412,87 +412,254 @@ nav::after {
 
 
 /* ================================================================
-   14. PHOTOGRAPHY CARDS + LIGHTBOX
+   14. PHOTOGRAPHY — ALBUM CARDS + SLIDESHOW
 ================================================================ */
-.photo-card { cursor: pointer; }
 
-.card-thumb-wrap {
+/* Album list — stacked vertically, full width */
+.album-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+}
+
+/* Each album card — horizontal layout: cover left, info right */
+.album-card {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  background: var(--bg);
+  cursor: pointer;
   position: relative;
-  width: 100%;
-  height: 190px;
-  margin: 1rem 0;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+.album-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 0;
+  background: var(--accent);
+  transition: height 0.35s ease;
+}
+.album-card:hover { background: var(--surface); }
+.album-card:hover::before { height: 100%; }
+
+/* Cover image — left side */
+.album-cover {
+  position: relative;
+  height: 200px;
   overflow: hidden;
   background: var(--border-dim);
 }
-.card-thumb {
-  width: 100%; height: 100%; object-fit: cover;
+.album-cover img {
+  width: 100%; height: 100%;
+  object-fit: cover;
   transition: transform 0.5s ease, filter 0.3s;
   filter: grayscale(20%);
 }
-.photo-card:hover .card-thumb { transform: scale(1.04); filter: grayscale(0%); }
-
-.card-thumb-overlay {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  background: rgba(0,0,0,0.55);
-  opacity: 0; transition: opacity 0.3s;
+.album-card:hover .album-cover img {
+  transform: scale(1.04);
+  filter: grayscale(0%);
 }
-.photo-card:hover .card-thumb-overlay { opacity: 1; }
-.lb-hint { font-size: 10px; color: var(--accent); letter-spacing: 0.15em; font-family: var(--mono); }
 
-/* Lightbox */
-.lightbox {
+/* Overlay on cover */
+.album-cover-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.album-card:hover .album-cover-overlay { opacity: 1; }
+
+.album-play-hint {
+  font-size: 10px;
+  color: #fff;
+  letter-spacing: 0.15em;
+  font-family: var(--mono);
+}
+.album-count {
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.1em;
+  font-family: var(--mono);
+}
+
+/* Info — right side */
+.album-info {
+  padding: 1.6rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.album-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.album-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.2;
+}
+.album-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.75;
+  font-family: var(--sans);
+  font-weight: 300;
+}
+
+/* Hidden photos list — read by JS */
+.album-photos { display: none; }
+
+
+/* ── SLIDESHOW OVERLAY ─────────────────────────────────── */
+.slideshow {
   display: none;
   position: fixed; inset: 0;
-  background: rgba(6, 6, 6, 0.96);
-  backdrop-filter: blur(12px);
+  background: rgba(6,6,6,0.97);
+  backdrop-filter: blur(16px);
   z-index: 500;
-  align-items: center; justify-content: center;
   flex-direction: column;
 }
-.lightbox.open { display: flex; animation: lbOpen 0.25s ease both; }
-
-@keyframes lbOpen {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+.slideshow.open {
+  display: flex;
+  animation: lbOpen 0.25s ease both;
 }
 
-.lb-inner {
-  display: flex; flex-direction: column; align-items: center;
-  max-width: 88vw; max-height: 88vh;
+/* Top bar */
+.ss-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.8rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
 }
-.lb-img {
-  max-width: 100%; max-height: 80vh; object-fit: contain;
-  display: block; transition: opacity 0.2s;
+.ss-album-title {
+  font-size: 11px;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: var(--mono);
 }
-.lb-img.loading { opacity: 0.3; }
-.lb-caption {
-  display: flex; justify-content: space-between; align-items: center;
-  width: 100%; margin-top: 0.8rem; padding: 0 0.2rem;
+.ss-counter {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.1em;
+  font-family: var(--mono);
 }
-.lb-title   { font-size: 10px; color: var(--muted); letter-spacing: 0.12em; font-family: var(--mono); }
-.lb-counter { font-size: 10px; color: var(--accent); letter-spacing: 0.12em; font-family: var(--mono); }
-
-.lb-close {
-  position: fixed; top: 1.5rem; right: 1.5rem;
-  background: none; border: 1px solid var(--border); color: var(--muted);
-  font-size: 14px; width: 34px; height: 34px;
+.ss-close {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.5);
+  font-size: 14px;
+  width: 32px; height: 32px;
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--mono); transition: border-color 0.2s, color 0.2s; z-index: 1000;
+  cursor: pointer;
+  font-family: var(--mono);
+  transition: border-color 0.2s, color 0.2s;
 }
-.lb-close:hover { border-color: var(--accent); color: var(--accent); }
+.ss-close:hover { border-color: #fff; color: #fff; }
 
-.lb-prev, .lb-next {
-  position: fixed; top: 50%; transform: translateY(-50%);
-  background: none; border: 1px solid var(--border); color: var(--muted);
-  font-size: 16px; width: 38px; height: 38px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--mono); transition: border-color 0.2s, color 0.2s; z-index: 1000;
+/* Stage — image + prev/next */
+.ss-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  min-height: 0;
 }
-.lb-prev { left: 1.5rem; }
-.lb-next { right: 1.5rem; }
-.lb-prev:hover, .lb-next:hover { border-color: var(--accent); color: var(--accent); }
-.lb-prev.hidden, .lb-next.hidden { opacity: 0.15; pointer-events: none; }
+.ss-img-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-width: 0;
+}
+.ss-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: opacity 0.25s ease;
+}
+.ss-img.loading { opacity: 0; }
+
+.ss-prev, .ss-next {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.5);
+  font-size: 18px;
+  width: 44px; height: 44px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-family: var(--mono);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.ss-prev:hover, .ss-next:hover {
+  border-color: #fff;
+  color: #fff;
+  background: rgba(255,255,255,0.05);
+}
+.ss-prev.hidden, .ss-next.hidden { opacity: 0.15; pointer-events: none; }
+
+/* Bottom bar */
+.ss-bottom {
+  padding: 1rem 1.8rem 1.4rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  flex-shrink: 0;
+}
+.ss-caption {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.12em;
+  font-family: var(--mono);
+  text-transform: uppercase;
+}
+
+/* Dot indicators */
+.ss-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.ss-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.ss-dot.active {
+  background: #fff;
+  transform: scale(1.3);
+}
+.ss-dot:hover { background: rgba(255,255,255,0.6); }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .album-card { grid-template-columns: 1fr; }
+  .album-cover { height: 160px; }
+  .ss-prev, .ss-next { width: 36px; height: 36px; font-size: 14px; }
+}
 
 
 /* ================================================================

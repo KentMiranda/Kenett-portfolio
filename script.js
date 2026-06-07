@@ -225,73 +225,97 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 
 
 /* ================================================================
-   7. LIGHTBOX — Photography
+   7. ALBUM SLIDESHOW — Photography
+   Opens a fullscreen slideshow for the clicked album.
+   Each album card has .album-photos > span[data-src, data-title].
 ================================================================ */
-const lightbox  = document.getElementById('lightbox');
-const lbImg     = document.getElementById('lbImg');
-const lbTitle   = document.getElementById('lbTitle');
-const lbCounter = document.getElementById('lbCounter');
-const lbClose   = document.getElementById('lbClose');
-const lbPrev    = document.getElementById('lbPrev');
-const lbNext    = document.getElementById('lbNext');
+(function () {
+  const ss        = document.getElementById('slideshow');
+  const ssImg     = document.getElementById('ssImg');
+  const ssCaption = document.getElementById('ssCaption');
+  const ssCounter = document.getElementById('ssCounter');
+  const ssTitle   = document.getElementById('ssAlbumTitle');
+  const ssDots    = document.getElementById('ssDots');
+  const ssClose   = document.getElementById('ssClose');
+  const ssPrev    = document.getElementById('ssPrev');
+  const ssNext    = document.getElementById('ssNext');
+  if (!ss) return;
 
-let lbPhotos = [];
-let lbIndex  = 0;
+  let photos  = [];
+  let current = 0;
 
-function buildPhotoList(group, firstSrc, firstTitle) {
-  const photos = [{ src: firstSrc, title: firstTitle }];
-  document.querySelectorAll(`.lb-extras [data-group="${group}"]`).forEach(el => {
-    photos.push({ src: el.dataset.src, title: el.dataset.title });
+  function buildDots() {
+    ssDots.innerHTML = '';
+    photos.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'ss-dot' + (i === current ? ' active' : '');
+      dot.setAttribute('aria-label', `Go to photo ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      ssDots.appendChild(dot);
+    });
+  }
+
+  function updateDots() {
+    ssDots.querySelectorAll('.ss-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function goTo(index) {
+    current = index;
+    const photo = photos[current];
+    ssImg.classList.add('loading');
+    ssImg.src = photo.src;
+    ssImg.alt = photo.title;
+    ssImg.onload = () => ssImg.classList.remove('loading');
+    ssCaption.textContent = photo.title;
+    ssCounter.textContent = `${current + 1} / ${photos.length}`;
+    ssPrev.classList.toggle('hidden', current === 0);
+    ssNext.classList.toggle('hidden', current === photos.length - 1);
+    updateDots();
+  }
+
+  function open(albumCard) {
+    const title   = albumCard.querySelector('.album-title').textContent;
+    const spans   = albumCard.querySelectorAll('.album-photos span');
+    photos  = Array.from(spans).map(s => ({ src: s.dataset.src, title: s.dataset.title }));
+    current = 0;
+    ssTitle.textContent = title;
+    buildDots();
+    goTo(0);
+    ss.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    ss.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => { ssImg.src = ''; }, 300);
+  }
+
+  ssClose.addEventListener('click', close);
+  ss.addEventListener('click', e => { if (e.target === ss) close(); });
+  ssPrev.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
+  ssNext.addEventListener('click', () => { if (current < photos.length - 1) goTo(current + 1); });
+
+  document.addEventListener('keydown', e => {
+    if (!ss.classList.contains('open')) return;
+    if (e.key === 'Escape')      close();
+    if (e.key === 'ArrowLeft'  && current > 0)                  goTo(current - 1);
+    if (e.key === 'ArrowRight' && current < photos.length - 1)  goTo(current + 1);
   });
-  return photos;
-}
 
-function openLightbox(photos, startIndex) {
-  lbPhotos = photos;
-  lbIndex  = startIndex;
-  showPhoto(lbIndex);
-  lightbox.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
+  /* Attach click to every album card */
+  document.querySelectorAll('.album-card').forEach(card => {
+    card.addEventListener('click', () => open(card));
 
-function showPhoto(index) {
-  const photo = lbPhotos[index];
-  lbImg.classList.add('loading');
-  lbImg.src = photo.src;
-  lbImg.alt = photo.title;
-  lbImg.onload = () => lbImg.classList.remove('loading');
-  lbTitle.textContent   = photo.title;
-  lbCounter.textContent = `${index + 1} / ${lbPhotos.length}`;
-  lbPrev.classList.toggle('hidden', index === 0);
-  lbNext.classList.toggle('hidden', index === lbPhotos.length - 1);
-}
-
-function closeLightbox() {
-  lightbox.classList.remove('open');
-  document.body.style.overflow = '';
-  setTimeout(() => { lbImg.src = ''; }, 300);
-}
-
-lbClose.addEventListener('click', closeLightbox);
-lbPrev.addEventListener('click', () => { if (lbIndex > 0) showPhoto(--lbIndex); });
-lbNext.addEventListener('click', () => { if (lbIndex < lbPhotos.length - 1) showPhoto(++lbIndex); });
-lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-
-document.addEventListener('keydown', (e) => {
-  if (!lightbox.classList.contains('open')) return;
-  if (e.key === 'Escape')      closeLightbox();
-  if (e.key === 'ArrowLeft'  && lbIndex > 0)                   showPhoto(--lbIndex);
-  if (e.key === 'ArrowRight' && lbIndex < lbPhotos.length - 1) showPhoto(++lbIndex);
-});
-
-document.querySelectorAll('.photo-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const group  = card.dataset.group;
-    const src    = card.dataset.src;
-    const title  = card.dataset.title;
-    openLightbox(buildPhotoList(group, src, title), 0);
+    /* Show photo count on the card */
+    const count   = card.querySelectorAll('.album-photos span').length;
+    const albumId = card.dataset.album;
+    const countEl = document.getElementById(`count-${albumId}`);
+    if (countEl) countEl.textContent = `${count} photo${count !== 1 ? 's' : ''}`;
   });
-});
+})();
 
 
 /* ================================================================

@@ -26,18 +26,29 @@
   <canvas class="noise-canvas" id="noiseCanvas"></canvas>
 
   <!-- ============================================================
-    LIGHTBOX OVERLAY
+    SLIDESHOW OVERLAY
+    Opened when an album card is clicked.
+    Shows photos one at a time with prev/next navigation.
   ============================================================ -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
-    <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
-    <button class="lb-prev"  id="lbPrev"  aria-label="Previous photo">←</button>
-    <button class="lb-next"  id="lbNext"  aria-label="Next photo">→</button>
-    <div class="lb-inner">
-      <img class="lb-img" id="lbImg" src="" alt="" />
-      <div class="lb-caption">
-        <span class="lb-title"   id="lbTitle"></span>
-        <span class="lb-counter" id="lbCounter"></span>
+  <div class="slideshow" id="slideshow" role="dialog" aria-modal="true" aria-label="Photo slideshow">
+    <!-- Top bar -->
+    <div class="ss-topbar">
+      <div class="ss-album-title" id="ssAlbumTitle"></div>
+      <div class="ss-counter" id="ssCounter"></div>
+      <button class="ss-close" id="ssClose" aria-label="Close slideshow">✕</button>
+    </div>
+    <!-- Main image -->
+    <div class="ss-stage">
+      <button class="ss-prev" id="ssPrev" aria-label="Previous">←</button>
+      <div class="ss-img-wrap">
+        <img class="ss-img" id="ssImg" src="" alt="" />
       </div>
+      <button class="ss-next" id="ssNext" aria-label="Next">→</button>
+    </div>
+    <!-- Bottom: caption + dot indicators -->
+    <div class="ss-bottom">
+      <div class="ss-caption" id="ssCaption"></div>
+      <div class="ss-dots" id="ssDots"></div>
     </div>
   </div>
 
@@ -146,114 +157,153 @@
           <button class="tab-btn"        data-group="creative" data-tab="video">Video Editing</button>
         </div>
 
-        <!-- PHOTOGRAPHY TAB -->
+        <!-- ════════════════════════════════════════════════════════
+          PHOTOGRAPHY TAB — ALBUM CARDS
+          Each card = one album. Clicking opens a fullscreen slideshow
+          for that album only.
+
+          HOW TO ADD AN ALBUM:
+          1. Copy one .album-card block below
+          2. Set data-album="your-album-id" (unique, no spaces)
+          3. Add all photo paths inside .album-photos as <span> tags
+             - data-src   = full image path shown in slideshow
+             - data-title = caption shown at bottom of slide
+          4. Set data-thumb to the cover image shown on the card
+          5. Update title, year, desc, and tool chips
+
+          FOLDER STRUCTURE:
+          assets/images/
+          └── your-album/
+              ├── cover.jpg       ← card thumbnail
+              ├── photo-1.jpg
+              ├── photo-2.jpg
+              └── photo-3.jpg
+        ════════════════════════════════════════════════════════ -->
         <div class="tab-panel active" id="tab-photography">
-          <div class="project-grid">
+          <div class="album-list">
 
-            <div class="project-card photo-card"
-                 data-src="assets/images/urban-geometry/photo-1.jpg"
-                 data-thumb="assets/images/urban-geometry/thumb.jpg"
-                 data-title="Urban Geometry"
-                 data-group="urban-geometry">
-              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta">
-                <span class="card-type">Photography</span>
-                <span class="card-year">2025</span>
+            <!-- ══ ALBUM 1 — Urban Geometry ══ -->
+            <div class="album-card" data-album="urban-geometry" data-thumb="assets/images/urban-geometry/cover.jpg">
+              <div class="album-cover">
+                <img src="assets/images/urban-geometry/cover.jpg" alt="Urban Geometry" />
+                <div class="album-cover-overlay">
+                  <span class="album-play-hint">▶ &nbsp;[ open slideshow ]</span>
+                  <span class="album-count" id="count-urban-geometry"></span>
+                </div>
               </div>
-              <div class="card-title">Urban Geometry</div>
-              <div class="card-thumb-wrap">
-                <img class="card-thumb" src="assets/images/urban-geometry/thumb.jpg" alt="Urban Geometry" />
-                <div class="card-thumb-overlay"><span class="lb-hint">[ click to view series ]</span></div>
+              <div class="album-info">
+                <div class="album-meta">
+                  <span class="card-type">Photography</span>
+                  <span class="card-year">2025</span>
+                </div>
+                <div class="album-title">Urban Geometry</div>
+                <div class="album-desc">A series exploring architectural patterns and the abstract beauty of city structures in monochrome.</div>
+                <div class="card-tools">
+                  <span class="tool-chip">Sony A7IV</span>
+                  <span class="tool-chip">Lightroom</span>
+                  <span class="tool-chip">Monochrome</span>
+                </div>
               </div>
-              <div class="card-desc">A series exploring architectural patterns and the abstract beauty of city structures in monochrome.</div>
-              <div class="card-tools">
-                <span class="tool-chip">Sony A7IV</span>
-                <span class="tool-chip">Lightroom</span>
-                <span class="tool-chip">Monochrome</span>
+              <!-- ALL PHOTOS IN THIS ALBUM — add as many <span> as you want -->
+              <div class="album-photos" aria-hidden="true">
+                <span data-src="assets/images/urban-geometry/photo-1.jpg" data-title="Urban Geometry — I"></span>
+                <span data-src="assets/images/urban-geometry/photo-2.jpg" data-title="Urban Geometry — II"></span>
+                <span data-src="assets/images/urban-geometry/photo-3.jpg" data-title="Urban Geometry — III"></span>
+                <!-- ══ ADD MORE PHOTOS HERE ══
+                <span data-src="assets/images/urban-geometry/photo-4.jpg" data-title="Urban Geometry — IV"></span>
+                -->
               </div>
             </div>
 
-            <div class="project-card photo-card"
-                 data-src="assets/images/golden-hour/photo-1.jpg"
-                 data-thumb="assets/images/golden-hour/thumb.jpg"
-                 data-title="Golden Hour Portraits"
-                 data-group="golden-hour">
-              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta">
-                <span class="card-type">Photography</span>
-                <span class="card-year">2024</span>
+            <!-- ══ ALBUM 2 — Golden Hour Portraits ══ -->
+            <div class="album-card" data-album="golden-hour" data-thumb="assets/images/golden-hour/cover.jpg">
+              <div class="album-cover">
+                <img src="assets/images/golden-hour/cover.jpg" alt="Golden Hour Portraits" />
+                <div class="album-cover-overlay">
+                  <span class="album-play-hint">▶ &nbsp;[ open slideshow ]</span>
+                  <span class="album-count" id="count-golden-hour"></span>
+                </div>
               </div>
-              <div class="card-title">Golden Hour Portraits</div>
-              <div class="card-thumb-wrap">
-                <img class="card-thumb" src="assets/images/golden-hour/thumb.jpg" alt="Golden Hour Portraits" />
-                <div class="card-thumb-overlay"><span class="lb-hint">[ click to view series ]</span></div>
+              <div class="album-info">
+                <div class="album-meta">
+                  <span class="card-type">Photography</span>
+                  <span class="card-year">2024</span>
+                </div>
+                <div class="album-title">Golden Hour Portraits</div>
+                <div class="album-desc">Candid and posed portraits capturing the warmth of natural golden-hour light on location.</div>
+                <div class="card-tools">
+                  <span class="tool-chip">Portrait</span>
+                  <span class="tool-chip">Natural Light</span>
+                  <span class="tool-chip">Capture One</span>
+                </div>
               </div>
-              <div class="card-desc">Candid and posed portraits capturing the warmth of natural golden-hour light on location.</div>
-              <div class="card-tools">
-                <span class="tool-chip">Portrait</span>
-                <span class="tool-chip">Natural Light</span>
-                <span class="tool-chip">Capture One</span>
-              </div>
-            </div>
-
-            <div class="project-card photo-card"
-                 data-src="assets/images/street-flux/photo-1.jpg"
-                 data-thumb="assets/images/street-flux/thumb.jpg"
-                 data-title="Street Flux"
-                 data-group="street-flux">
-              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta">
-                <span class="card-type">Photography</span>
-                <span class="card-year">2024</span>
-              </div>
-              <div class="card-title">Street Flux</div>
-              <div class="card-thumb-wrap">
-                <img class="card-thumb" src="assets/images/street-flux/thumb.jpg" alt="Street Flux" />
-                <div class="card-thumb-overlay"><span class="lb-hint">[ click to view series ]</span></div>
-              </div>
-              <div class="card-desc">A documentary-style street photography project capturing everyday moments in the metro.</div>
-              <div class="card-tools">
-                <span class="tool-chip">Street</span>
-                <span class="tool-chip">35mm</span>
-                <span class="tool-chip">Photoshop</span>
+              <div class="album-photos" aria-hidden="true">
+                <span data-src="assets/images/golden-hour/photo-1.jpg" data-title="Golden Hour — I"></span>
+                <span data-src="assets/images/golden-hour/photo-2.jpg" data-title="Golden Hour — II"></span>
+                <span data-src="assets/images/golden-hour/photo-3.jpg" data-title="Golden Hour — III"></span>
               </div>
             </div>
 
-            <div class="project-card photo-card"
-                 data-src="assets/images/still-life/photo-1.jpg"
-                 data-thumb="assets/images/still-life/thumb.jpg"
-                 data-title="Still Life Studies"
-                 data-group="still-life">
-              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta">
-                <span class="card-type">Photography</span>
-                <span class="card-year">2023</span>
+            <!-- ══ ALBUM 3 — Street Flux ══ -->
+            <div class="album-card" data-album="street-flux" data-thumb="assets/images/street-flux/cover.jpg">
+              <div class="album-cover">
+                <img src="assets/images/street-flux/cover.jpg" alt="Street Flux" />
+                <div class="album-cover-overlay">
+                  <span class="album-play-hint">▶ &nbsp;[ open slideshow ]</span>
+                  <span class="album-count" id="count-street-flux"></span>
+                </div>
               </div>
-              <div class="card-title">Still Life Studies</div>
-              <div class="card-thumb-wrap">
-                <img class="card-thumb" src="assets/images/still-life/thumb.jpg" alt="Still Life Studies" />
-                <div class="card-thumb-overlay"><span class="lb-hint">[ click to view series ]</span></div>
+              <div class="album-info">
+                <div class="album-meta">
+                  <span class="card-type">Photography</span>
+                  <span class="card-year">2024</span>
+                </div>
+                <div class="album-title">Street Flux</div>
+                <div class="album-desc">A documentary-style street photography project capturing everyday moments in the metro.</div>
+                <div class="card-tools">
+                  <span class="tool-chip">Street</span>
+                  <span class="tool-chip">35mm</span>
+                  <span class="tool-chip">Photoshop</span>
+                </div>
               </div>
-              <div class="card-desc">Minimalist product and object photography with controlled studio lighting and clean compositions.</div>
-              <div class="card-tools">
-                <span class="tool-chip">Studio</span>
-                <span class="tool-chip">Product</span>
-                <span class="tool-chip">Strobes</span>
+              <div class="album-photos" aria-hidden="true">
+                <span data-src="assets/images/street-flux/photo-1.jpg" data-title="Street Flux — I"></span>
+                <span data-src="assets/images/street-flux/photo-2.jpg" data-title="Street Flux — II"></span>
+                <span data-src="assets/images/street-flux/photo-3.jpg" data-title="Street Flux — III"></span>
               </div>
             </div>
 
-          </div><!-- /project-grid -->
+            <!-- ══ ALBUM 4 — Still Life Studies ══ -->
+            <div class="album-card" data-album="still-life" data-thumb="assets/images/still-life/cover.jpg">
+              <div class="album-cover">
+                <img src="assets/images/still-life/cover.jpg" alt="Still Life Studies" />
+                <div class="album-cover-overlay">
+                  <span class="album-play-hint">▶ &nbsp;[ open slideshow ]</span>
+                  <span class="album-count" id="count-still-life"></span>
+                </div>
+              </div>
+              <div class="album-info">
+                <div class="album-meta">
+                  <span class="card-type">Photography</span>
+                  <span class="card-year">2023</span>
+                </div>
+                <div class="album-title">Still Life Studies</div>
+                <div class="album-desc">Minimalist product and object photography with controlled studio lighting and clean compositions.</div>
+                <div class="card-tools">
+                  <span class="tool-chip">Studio</span>
+                  <span class="tool-chip">Product</span>
+                  <span class="tool-chip">Strobes</span>
+                </div>
+              </div>
+              <div class="album-photos" aria-hidden="true">
+                <span data-src="assets/images/still-life/photo-1.jpg" data-title="Still Life — I"></span>
+                <span data-src="assets/images/still-life/photo-2.jpg" data-title="Still Life — II"></span>
+              </div>
+            </div>
 
-          <div class="lb-extras" aria-hidden="true">
-            <span data-group="urban-geometry" data-src="assets/images/urban-geometry/photo-2.jpg" data-title="Urban Geometry — II"></span>
-            <span data-group="urban-geometry" data-src="assets/images/urban-geometry/photo-3.jpg" data-title="Urban Geometry — III"></span>
-            <span data-group="golden-hour" data-src="assets/images/golden-hour/photo-2.jpg" data-title="Golden Hour — II"></span>
-            <span data-group="golden-hour" data-src="assets/images/golden-hour/photo-3.jpg" data-title="Golden Hour — III"></span>
-            <span data-group="street-flux" data-src="assets/images/street-flux/photo-2.jpg" data-title="Street Flux — II"></span>
-            <span data-group="street-flux" data-src="assets/images/street-flux/photo-3.jpg" data-title="Street Flux — III"></span>
-            <span data-group="still-life" data-src="assets/images/still-life/photo-2.jpg" data-title="Still Life — II"></span>
-          </div>
+            <!-- ══ ADD MORE ALBUMS HERE — copy any block above ══ -->
 
+          </div><!-- /album-list -->
         </div><!-- /tab-photography -->
 
 
