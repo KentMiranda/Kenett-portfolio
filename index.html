@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kenett Fernandez — Portfolio</title>
-  <meta name="description" content="Video editor, photographer, and web developer based in PH." />
+  <title>Kenett Fernandez — CS Portfolio</title>
+  <meta name="description" content="Computer science student, frontend developer, and cybersecurity enthusiast based in PH." />
   <meta name="author" content="Kenett Fernandez" />
-  <meta property="og:title" content="Kenett Fernandez — Portfolio" />
-  <meta property="og:description" content="Video editor, photographer, and web developer." />
-  <meta property="og:image" content="assets/images/og-preview.jpg" />
+  <meta property="og:title" content="Kenett Fernandez — CS Portfolio" />
+  <meta property="og:description" content="Frontend developer and cybersecurity learner." />
   <meta property="og:url" content="https://yoursite.com" />
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -25,30 +24,21 @@
   <!-- NOISE OVERLAY -->
   <canvas class="noise-canvas" id="noiseCanvas"></canvas>
 
-  <!-- ============================================================
-    SLIDESHOW OVERLAY
-    Opened when an album card is clicked.
-    Shows photos one at a time with prev/next navigation.
-  ============================================================ -->
-  <div class="slideshow" id="slideshow" role="dialog" aria-modal="true" aria-label="Photo slideshow">
-    <!-- Top bar -->
-    <div class="ss-topbar">
-      <div class="ss-album-title" id="ssAlbumTitle"></div>
-      <div class="ss-counter" id="ssCounter"></div>
-      <button class="ss-close" id="ssClose" aria-label="Close slideshow">✕</button>
-    </div>
-    <!-- Main image -->
-    <div class="ss-stage">
-      <button class="ss-prev" id="ssPrev" aria-label="Previous">←</button>
-      <div class="ss-img-wrap">
-        <img class="ss-img" id="ssImg" src="" alt="" />
+  <!-- VIDEO DEMO MODAL -->
+  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Video demo">
+    <div class="vm-inner">
+      <div class="vm-topbar">
+        <span class="vm-title" id="vmTitle"></span>
+        <button class="vm-close" id="vmClose" aria-label="Close video">✕</button>
       </div>
-      <button class="ss-next" id="ssNext" aria-label="Next">→</button>
-    </div>
-    <!-- Bottom: caption + dot indicators -->
-    <div class="ss-bottom">
-      <div class="ss-caption" id="ssCaption"></div>
-      <div class="ss-dots" id="ssDots"></div>
+      <div class="vm-stage">
+        <div class="vm-placeholder" id="vmPlaceholder">
+          <div class="vm-placeholder-icon">▶</div>
+          <div class="vm-placeholder-text" id="vmPlaceholderText">Video demo coming soon</div>
+          <div class="vm-placeholder-sub">Replace <code>data-video</code> with your YouTube/Drive link</div>
+        </div>
+        <iframe class="vm-iframe" id="vmIframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
     </div>
   </div>
 
@@ -62,11 +52,15 @@
       <div class="nav-center">
         <span class="nav-clock" id="navClock"></span>
       </div>
-      <div class="nav-links">
+      <div class="nav-links" id="navLinks">
         <a href="#about">about</a>
         <a href="#work">work</a>
+        <a href="#security">security</a>
         <a href="#contact">contact</a>
       </div>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
@@ -76,32 +70,34 @@
   ============================================================ -->
   <section class="hero">
     <div class="wrap">
-      <div class="hero-label">Portfolio — 2025</div>
+      <div class="hero-label">CS Portfolio — 2025</div>
       <h1 class="hero-name">
         <span class="scramble-text" data-text="Kenett">Kenett</span><br>
         <span class="accent scramble-text" data-text="Fernandez">Fernandez</span><span class="cursor"></span>
       </h1>
-      <p class="hero-sub">/ video editor — photographer — web developer /</p>
+      <p class="hero-sub">/ computer science student — frontend dev — cybersecurity learner /</p>
       <div class="hero-tags">
-        <span class="tag">Video Editing</span>
-        <span class="tag">Photography</span>
-        <span class="tag">Web Dev</span>
+        <span class="tag">Frontend Dev</span>
         <span class="tag">UI / UX</span>
-        <span class="tag">Post-Production</span>
+        <span class="tag">React</span>
+        <span class="tag">Cybersecurity</span>
+        <span class="tag">Web Dev</span>
       </div>
       <div class="status-line">
         <span class="status-dot"></span>
-        <span>Available for freelance work</span>
+        <span>Open to opportunities</span>
         <span class="divider">//</span>
         <span>Based in PH</span>
       </div>
+      <div class="hero-cta">
+        <a href="#" class="hero-resume-btn" download>↓ Download Resume</a>
+      </div>
       <div class="hero-deco" aria-hidden="true">
         <span class="hero-deco-line"></span>
-        <span class="hero-deco-text">EST. 2022 // VISUAL SYSTEMS</span>
+        <span class="hero-deco-text">EST. 2022 // BUILDING DIGITAL SYSTEMS</span>
         <span class="hero-deco-line"></span>
       </div>
     </div>
-    <!-- corner brackets -->
     <span class="corner corner--tl" aria-hidden="true"></span>
     <span class="corner corner--tr" aria-hidden="true"></span>
     <span class="corner corner--bl" aria-hidden="true"></span>
@@ -121,15 +117,15 @@
       </div>
       <div class="about-grid">
         <div class="about-text">
-          <p>I'm Kenett — a visual storyteller and developer who blurs the line between creative craft and technical precision. I shoot, cut, and code.</p>
-          <p>Whether it's a cinematic short, a moody portrait series, or a pixel-perfect web interface, I bring the same obsessive attention to detail to every project.</p>
-          <p>Currently exploring the intersection of motion, design, and interactive digital experiences.</p>
+          <p>I'm Kenett — a computer science student based in the Philippines with a focus on frontend development and an active interest in cybersecurity.</p>
+          <p>I've collaborated on real-world systems like an internship management platform, built a full web presence for a small business, and I'm currently deepening my skills in network security and ethical hacking.</p>
+          <p>I believe in writing clean, purposeful code and building things that actually work for real people.</p>
         </div>
         <div class="about-stats">
-          <div class="stat-cell"><div class="stat-num" data-target="3">0</div><div class="stat-label">Years editing</div></div>
-          <div class="stat-cell"><div class="stat-num" data-target="50">0</div><div class="stat-label">Photos shot</div></div>
-          <div class="stat-cell"><div class="stat-num" data-target="12">0</div><div class="stat-label">Web projects</div></div>
-          <div class="stat-cell"><div class="stat-num">∞</div><div class="stat-label">Ideas brewing</div></div>
+          <div class="stat-cell"><div class="stat-num" data-target="3">0</div><div class="stat-label">Years coding</div></div>
+          <div class="stat-cell"><div class="stat-num" data-target="8">0</div><div class="stat-label">Projects built</div></div>
+          <div class="stat-cell"><div class="stat-num" data-target="2">0</div><div class="stat-label">Team projects</div></div>
+          <div class="stat-cell"><div class="stat-num infinity">∞</div><div class="stat-label">Things to learn</div></div>
         </div>
       </div>
     </div>
@@ -147,274 +143,9 @@
         <div class="section-line"></div>
       </div>
 
-
-      <!-- ── CREATIVE PROJECTS ──────────────────────────────────── -->
+      <!-- ── FRONTEND / WEB DEV ─────────────────────────────── -->
       <div class="work-group">
-        <div class="group-label">// Creative Projects</div>
-
-        <div class="tabs" id="creative-tabs">
-          <button class="tab-btn active" data-group="creative" data-tab="photography">Photography</button>
-          <button class="tab-btn"        data-group="creative" data-tab="video">Video Editing</button>
-        </div>
-
-        <!-- ════════════════════════════════════════════════════════
-          PHOTOGRAPHY TAB — ALBUM CARDS
-          Each card = one album. Clicking opens a fullscreen slideshow
-          for that album only.
-
-          HOW TO ADD AN ALBUM:
-          1. Copy one .album-card block below
-          2. Set data-album="your-album-id" (unique, no spaces)
-          3. Add all photo paths inside .album-photos as <span> tags
-             - data-src   = full image path shown in slideshow
-             - data-title = caption shown at bottom of slide
-          4. Set data-thumb to the cover image shown on the card
-          5. Update title, year, desc, and tool chips
-
-          FOLDER STRUCTURE:
-          assets/images/
-          └── your-album/
-              ├── cover.jpg       ← card thumbnail
-              ├── photo-1.jpg
-              ├── photo-2.jpg
-              └── photo-3.jpg
-        ════════════════════════════════════════════════════════ -->
-        <div class="tab-panel active" id="tab-photography">
-          <div class="album-list">
-
-            <!-- ══ ALBUM 1 — Urban Geometry ══ -->
-            <div class="album-card" data-album="urban-geometry" data-thumb="assets/images/urban-geometry/cover.jpg">
-              <div class="album-cover">
-                <img src="assets/images/urban-geometry/cover.jpg" alt="Urban Geometry" />
-                <div class="album-cover-overlay">
-                  <span class="album-play-hint">▶ &nbsp;[ open slideshow ]</span>
-                  <span class="album-count" id="count-urban-geometry"></span>
-                </div>
-              </div>
-              <div class="album-info">
-                <div class="album-meta">
-                  <span class="card-type">Photography</span>
-                  <span class="card-year">2025</span>
-                </div>
-                <div class="album-title">Urban Geometry</div>
-                <div class="album-desc">A series exploring architectural patterns and the abstract beauty of city structures in monochrome.</div>
-                <div class="card-tools">
-                  <span class="tool-chip">Sony A7IV</span>
-                  <span class="tool-chip">Lightroom</span>
-                  <span class="tool-chip">Monochrome</span>
-                </div>
-              </div>
-              <!-- ALL PHOTOS IN THIS ALBUM — add as many <span> as you want -->
-              <div class="album-photos" aria-hidden="true">
-                <span data-src="assets/images/urban-geometry/photo-1.jpg" data-title="Urban Geometry — I"></span>
-                <span data-src="assets/images/urban-geometry/photo-2.jpg" data-title="Urban Geometry — II"></span>
-                <span data-src="assets/images/urban-geometry/photo-3.jpg" data-title="Urban Geometry — III"></span>
-                <!-- ══ ADD MORE PHOTOS HERE ══
-                <span data-src="assets/images/urban-geometry/photo-4.jpg" data-title="Urban Geometry — IV"></span>
-                -->
-              </div>
-            </div>
-
-            <!-- ══ ALBUM 2 — Golden Hour Portraits ══ -->
-            <div class="album-card" data-album="golden-hour" data-thumb="assets/images/golden-hour/cover.jpg">
-              <div class="album-cover">
-                <img src="assets/images/golden-hour/cover.jpg" alt="Golden Hour Portraits" />
-                <div class="album-cover-overlay">
-                  <span class="album-play-hint">▶ &nbsp;[ open slideshow ]</span>
-                  <span class="album-count" id="count-golden-hour"></span>
-                </div>
-              </div>
-              <div class="album-info">
-                <div class="album-meta">
-                  <span class="card-type">Photography</span>
-                  <span class="card-year">2024</span>
-                </div>
-                <div class="album-title">Golden Hour Portraits</div>
-                <div class="album-desc">Candid and posed portraits capturing the warmth of natural golden-hour light on location.</div>
-                <div class="card-tools">
-                  <span class="tool-chip">Portrait</span>
-                  <span class="tool-chip">Natural Light</span>
-                  <span class="tool-chip">Capture One</span>
-                </div>
-              </div>
-              <div class="album-photos" aria-hidden="true">
-                <span data-src="assets/images/golden-hour/photo-1.jpg" data-title="Golden Hour — I"></span>
-                <span data-src="assets/images/golden-hour/photo-2.jpg" data-title="Golden Hour — II"></span>
-                <span data-src="assets/images/golden-hour/photo-3.jpg" data-title="Golden Hour — III"></span>
-              </div>
-            </div>
-
-            <!-- ══ ALBUM 3 — Street Flux ══ -->
-            <div class="album-card" data-album="street-flux" data-thumb="assets/images/street-flux/cover.jpg">
-              <div class="album-cover">
-                <img src="assets/images/street-flux/cover.jpg" alt="Street Flux" />
-                <div class="album-cover-overlay">
-                  <span class="album-play-hint">▶ &nbsp;[ open slideshow ]</span>
-                  <span class="album-count" id="count-street-flux"></span>
-                </div>
-              </div>
-              <div class="album-info">
-                <div class="album-meta">
-                  <span class="card-type">Photography</span>
-                  <span class="card-year">2024</span>
-                </div>
-                <div class="album-title">Street Flux</div>
-                <div class="album-desc">A documentary-style street photography project capturing everyday moments in the metro.</div>
-                <div class="card-tools">
-                  <span class="tool-chip">Street</span>
-                  <span class="tool-chip">35mm</span>
-                  <span class="tool-chip">Photoshop</span>
-                </div>
-              </div>
-              <div class="album-photos" aria-hidden="true">
-                <span data-src="assets/images/street-flux/photo-1.jpg" data-title="Street Flux — I"></span>
-                <span data-src="assets/images/street-flux/photo-2.jpg" data-title="Street Flux — II"></span>
-                <span data-src="assets/images/street-flux/photo-3.jpg" data-title="Street Flux — III"></span>
-              </div>
-            </div>
-
-            <!-- ══ ALBUM 4 — Still Life Studies ══ -->
-            <div class="album-card" data-album="still-life" data-thumb="assets/images/still-life/cover.jpg">
-              <div class="album-cover">
-                <img src="assets/images/still-life/cover.jpg" alt="Still Life Studies" />
-                <div class="album-cover-overlay">
-                  <span class="album-play-hint">▶ &nbsp;[ open slideshow ]</span>
-                  <span class="album-count" id="count-still-life"></span>
-                </div>
-              </div>
-              <div class="album-info">
-                <div class="album-meta">
-                  <span class="card-type">Photography</span>
-                  <span class="card-year">2023</span>
-                </div>
-                <div class="album-title">Still Life Studies</div>
-                <div class="album-desc">Minimalist product and object photography with controlled studio lighting and clean compositions.</div>
-                <div class="card-tools">
-                  <span class="tool-chip">Studio</span>
-                  <span class="tool-chip">Product</span>
-                  <span class="tool-chip">Strobes</span>
-                </div>
-              </div>
-              <div class="album-photos" aria-hidden="true">
-                <span data-src="assets/images/still-life/photo-1.jpg" data-title="Still Life — I"></span>
-                <span data-src="assets/images/still-life/photo-2.jpg" data-title="Still Life — II"></span>
-              </div>
-            </div>
-
-            <!-- ══ ADD MORE ALBUMS HERE — copy any block above ══ -->
-
-          </div><!-- /album-list -->
-        </div><!-- /tab-photography -->
-
-
-        <!-- VIDEO EDITING TAB -->
-        <div class="tab-panel" id="tab-video">
-          <div class="project-grid">
-
-            <div class="project-card video-card"
-                 data-preview="assets/videos/snippets/city-after-dark.mp4"
-                 data-thumb="assets/images/video-thumbs/city-after-dark.jpg"
-                 data-link="https://youtube.com/watch?v=YOUR_VIDEO_ID"
-                 data-title="City After Dark">
-              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta">
-                <span class="card-type">Video</span>
-                <span class="card-year">2025</span>
-              </div>
-              <div class="card-title">City After Dark</div>
-              <div class="card-video-wrap">
-                <img  class="card-video-thumb"    src="assets/images/video-thumbs/city-after-dark.jpg" alt="City After Dark" />
-                <video class="card-video-preview" src="assets/videos/snippets/city-after-dark.mp4" muted loop playsinline></video>
-                <div class="card-video-overlay"><span class="play-hint">▶ hover to preview · click for full video</span></div>
-              </div>
-              <div class="card-desc">A cinematic short film exploring urban nightlife with colour-graded footage and ambient sound design.</div>
-              <div class="card-tools">
-                <span class="tool-chip">Premiere Pro</span>
-                <span class="tool-chip">DaVinci</span>
-                <span class="tool-chip">Cinematic</span>
-              </div>
-            </div>
-
-            <div class="project-card video-card"
-                 data-preview="assets/videos/snippets/brand-reel-cafe.mp4"
-                 data-thumb="assets/images/video-thumbs/brand-reel-cafe.jpg"
-                 data-link="https://youtube.com/watch?v=YOUR_VIDEO_ID"
-                 data-title="Brand Reel — Local Café">
-              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta">
-                <span class="card-type">Video</span>
-                <span class="card-year">2024</span>
-              </div>
-              <div class="card-title">Brand Reel — Local Café</div>
-              <div class="card-video-wrap">
-                <img  class="card-video-thumb"    src="assets/images/video-thumbs/brand-reel-cafe.jpg" alt="Brand Reel" />
-                <video class="card-video-preview" src="assets/videos/snippets/brand-reel-cafe.mp4" muted loop playsinline></video>
-                <div class="card-video-overlay"><span class="play-hint">▶ hover to preview · click for full video</span></div>
-              </div>
-              <div class="card-desc">A 60-second promotional video for a local café, showcasing product and atmosphere with a warm grade.</div>
-              <div class="card-tools">
-                <span class="tool-chip">After Effects</span>
-                <span class="tool-chip">Motion Graphics</span>
-              </div>
-            </div>
-
-            <div class="project-card video-card"
-                 data-preview="assets/videos/snippets/event-highlights.mp4"
-                 data-thumb="assets/images/video-thumbs/event-highlights.jpg"
-                 data-link="https://youtube.com/watch?v=YOUR_VIDEO_ID"
-                 data-title="Event Highlights — Music Fest">
-              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta">
-                <span class="card-type">Video</span>
-                <span class="card-year">2024</span>
-              </div>
-              <div class="card-title">Event Highlights — Music Fest</div>
-              <div class="card-video-wrap">
-                <img  class="card-video-thumb"    src="assets/images/video-thumbs/event-highlights.jpg" alt="Event Highlights" />
-                <video class="card-video-preview" src="assets/videos/snippets/event-highlights.mp4" muted loop playsinline></video>
-                <div class="card-video-overlay"><span class="play-hint">▶ hover to preview · click for full video</span></div>
-              </div>
-              <div class="card-desc">Fast-paced event recap with sync-cut editing, color work, and transitions timed to the music.</div>
-              <div class="card-tools">
-                <span class="tool-chip">Premiere Pro</span>
-                <span class="tool-chip">Sync Cut</span>
-                <span class="tool-chip">Color Grade</span>
-              </div>
-            </div>
-
-            <div class="project-card video-card"
-                 data-preview="assets/videos/snippets/travel-montage.mp4"
-                 data-thumb="assets/images/video-thumbs/travel-montage.jpg"
-                 data-link="https://youtube.com/watch?v=YOUR_VIDEO_ID"
-                 data-title="Travel Montage — SEA">
-              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta">
-                <span class="card-type">Video</span>
-                <span class="card-year">2023</span>
-              </div>
-              <div class="card-title">Travel Montage — SEA</div>
-              <div class="card-video-wrap">
-                <img  class="card-video-thumb"    src="assets/images/video-thumbs/travel-montage.jpg" alt="Travel Montage" />
-                <video class="card-video-preview" src="assets/videos/snippets/travel-montage.mp4" muted loop playsinline></video>
-                <div class="card-video-overlay"><span class="play-hint">▶ hover to preview · click for full video</span></div>
-              </div>
-              <div class="card-desc">A personal travel video montage spanning Southeast Asia, shot on multiple formats and edited for mood.</div>
-              <div class="card-tools">
-                <span class="tool-chip">DaVinci</span>
-                <span class="tool-chip">GoPro</span>
-                <span class="tool-chip">Drone</span>
-              </div>
-            </div>
-
-          </div>
-        </div><!-- /tab-video -->
-
-      </div><!-- /creative work-group -->
-
-
-      <!-- ── DEV WORK ────────────────────────────────────────────── -->
-      <div class="work-group">
-        <div class="group-label accent2">// Dev Work</div>
+        <div class="group-label accent2">// Frontend &amp; Web Dev</div>
 
         <div class="tabs" id="dev-tabs">
           <button class="tab-btn active" data-group="dev" data-tab="webdev">Web Dev</button>
@@ -425,13 +156,51 @@
         <div class="tab-panel active" id="tab-webdev">
           <div class="project-grid">
 
+            <!-- Internship Management System -->
+            <div class="project-card dev"
+                 data-live=""
+                 data-video=""
+                 data-title="Internship Management System">
+              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
+              <div class="card-meta"><span class="card-type accent2">Team Project</span><span class="card-year">2025</span></div>
+              <div class="card-title">Internship Management System</div>
+              <div class="card-desc">A full-stack web application developed collaboratively with groupmates as a college subject project. Handles student internship tracking, company coordination, supervisor monitoring, and report submissions — streamlining the OJT process end-to-end.</div>
+              <div class="card-tools">
+                <span class="tool-chip">React</span>
+                <span class="tool-chip">Node.js</span>
+                <span class="tool-chip">MySQL</span>
+                <span class="tool-chip">Tailwind</span>
+              </div>
+              <div class="card-dev-links"></div>
+            </div>
+
+            <!-- Wood Engraving Business Website -->
+            <div class="project-card dev"
+                 data-live=""
+                 data-video=""
+                 data-title="Wood Engraving Business Website">
+              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
+              <div class="card-meta"><span class="card-type accent2">Freelance</span><span class="card-year">2025</span></div>
+              <div class="card-title">Wood Engraving Business Website</div>
+              <div class="card-desc">A business website built for my auntie's wood engraving venture. Features a product gallery, custom order form, and mobile-friendly layout — giving the business a clean online presence to reach more customers.</div>
+              <div class="card-tools">
+                <span class="tool-chip">HTML</span>
+                <span class="tool-chip">CSS</span>
+                <span class="tool-chip">JavaScript</span>
+                <span class="tool-chip">Responsive</span>
+              </div>
+              <div class="card-dev-links"></div>
+            </div>
+
+            <!-- This Portfolio -->
             <div class="project-card dev"
                  data-live="https://kenett-portfolio.vercel.app"
-                 data-github="https://github.com/KentMiranda/kenett-portfolio">
+                 data-video=""
+                 data-title="This Portfolio">
               <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
               <div class="card-meta"><span class="card-type accent2">Web Dev</span><span class="card-year">2025</span></div>
               <div class="card-title">This Portfolio</div>
-              <div class="card-desc">Built from scratch with vanilla HTML, CSS, and JS. ASCII-inspired, minimal, dark — fully responsive.</div>
+              <div class="card-desc">Built from scratch with vanilla HTML, CSS, and JS. ASCII-inspired terminal aesthetic, minimal, dark — fully responsive with custom cursor and text scramble effects.</div>
               <div class="card-tools">
                 <span class="tool-chip">HTML</span>
                 <span class="tool-chip">CSS</span>
@@ -441,40 +210,11 @@
             </div>
 
             <div class="project-card dev"
-                 data-live="https://your-booking-app.vercel.app"
-                 data-github="https://github.com/KentMiranda/booking-app">
-              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta"><span class="card-type accent2">Web Dev</span><span class="card-year">2024</span></div>
-              <div class="card-title">Photography Booking App</div>
-              <div class="card-desc">A client-facing booking system for photography sessions with calendar integration and form flows.</div>
-              <div class="card-tools">
-                <span class="tool-chip">React</span>
-                <span class="tool-chip">Node.js</span>
-                <span class="tool-chip">Tailwind</span>
-              </div>
-              <div class="card-dev-links"></div>
-            </div>
-
-            <div class="project-card dev"
-                 data-live="https://your-agency-landing.vercel.app"
-                 data-github="https://github.com/KentMiranda/agency-landing">
-              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta"><span class="card-type accent2">Web Dev</span><span class="card-year">2024</span></div>
-              <div class="card-title">Video Agency Landing Page</div>
-              <div class="card-desc">High-converting landing page for a video production agency with animations and scroll effects.</div>
-              <div class="card-tools">
-                <span class="tool-chip">Next.js</span>
-                <span class="tool-chip">GSAP</span>
-                <span class="tool-chip">Framer</span>
-              </div>
-              <div class="card-dev-links"></div>
-            </div>
-
-            <div class="project-card dev"
                  data-live=""
-                 data-github="https://github.com/KentMiranda/biz-dashboard">
+                 data-video=""
+                 data-title="Local Biz Dashboard">
               <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta"><span class="card-type accent2">Web Dev</span><span class="card-year">2023</span></div>
+              <div class="card-meta"><span class="card-type accent2">Web Dev</span><span class="card-year">2024</span></div>
               <div class="card-title">Local Biz Dashboard</div>
               <div class="card-desc">Admin dashboard for a small business to track orders, inventory, and sales data visualizations.</div>
               <div class="card-tools">
@@ -488,14 +228,14 @@
           </div>
         </div><!-- /tab-webdev -->
 
-
         <!-- UI/UX TAB -->
         <div class="tab-panel" id="tab-uiux">
           <div class="project-grid">
 
             <div class="project-card dev"
                  data-live="https://figma.com/proto/YOUR_LINK"
-                 data-github="">
+                 data-video=""
+                 data-title="Creative Studio App Design">
               <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
               <div class="card-meta"><span class="card-type accent2">UI / UX</span><span class="card-year">2025</span></div>
               <div class="card-title">Creative Studio App Design</div>
@@ -510,7 +250,8 @@
 
             <div class="project-card dev"
                  data-live="https://figma.com/proto/YOUR_LINK"
-                 data-github="">
+                 data-video=""
+                 data-title="E-Commerce UX Redesign">
               <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
               <div class="card-meta"><span class="card-type accent2">UI / UX</span><span class="card-year">2024</span></div>
               <div class="card-title">E-Commerce UX Redesign</div>
@@ -523,40 +264,114 @@
               <div class="card-dev-links"></div>
             </div>
 
-            <div class="project-card dev"
-                 data-live=""
-                 data-github="">
-              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta"><span class="card-type accent2">UI / UX</span><span class="card-year">2024</span></div>
-              <div class="card-title">Mobile Portfolio Concept</div>
-              <div class="card-desc">A swipe-based mobile UI concept for showcasing creative portfolios with gesture-first navigation.</div>
-              <div class="card-tools">
-                <span class="tool-chip">Figma</span>
-                <span class="tool-chip">Mobile-First</span>
-                <span class="tool-chip">Interaction Design</span>
-              </div>
-              <div class="card-dev-links"></div>
-            </div>
-
-            <div class="project-card dev"
-                 data-live=""
-                 data-github="">
-              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta"><span class="card-type accent2">UI / UX</span><span class="card-year">2023</span></div>
-              <div class="card-title">Brand Identity System</div>
-              <div class="card-desc">Complete visual identity and style guide for a local clothing brand, including typography and color system.</div>
-              <div class="card-tools">
-                <span class="tool-chip">Illustrator</span>
-                <span class="tool-chip">Brand Design</span>
-                <span class="tool-chip">Typography</span>
-              </div>
-              <div class="card-dev-links"></div>
-            </div>
-
           </div>
         </div><!-- /tab-uiux -->
 
-      </div><!-- /dev work-group -->
+      </div><!-- /work-group -->
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+    CYBERSECURITY SECTION
+  ============================================================ -->
+  <section class="section" id="security">
+    <div class="wrap">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <span class="section-title">Cybersecurity</span>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="security-intro">
+        <p>Alongside frontend development, I'm actively building skills in cybersecurity — studying network fundamentals, ethical hacking concepts, and secure coding practices. The projects below are what I'm working toward to demonstrate these abilities.</p>
+        <div class="security-badge">
+          <span class="status-dot"></span>
+          <span>[ currently developing ]</span>
+        </div>
+      </div>
+
+      <div class="project-grid">
+
+        <!-- Suggested project 1 -->
+        <div class="project-card sec"
+             data-live=""
+             data-video=""
+             data-title="Network Packet Analyzer & Visualizer">
+          <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
+          <div class="card-meta"><span class="card-type sec-type">[ suggestion ]</span><span class="card-year">—</span></div>
+          <div class="card-title">Network Packet Analyzer &amp; Visualizer</div>
+          <div class="card-desc">A Python tool using Scapy to capture, parse, and visualize network traffic — with a React dashboard showing protocol breakdown and live packet flow.</div>
+          <div class="card-tools">
+            <span class="tool-chip">Python</span>
+            <span class="tool-chip">Scapy</span>
+            <span class="tool-chip">React</span>
+            <span class="tool-chip">Networking</span>
+          </div>
+          <div class="card-dev-links"></div>
+        </div>
+
+        <!-- Suggested project 2 -->
+        <div class="project-card sec"
+             data-live=""
+             data-video=""
+             data-title="Web Vulnerability Scanner (Educational)">
+          <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
+          <div class="card-meta"><span class="card-type sec-type">[ suggestion ]</span><span class="card-year">—</span></div>
+          <div class="card-title">Web Vulnerability Scanner (Educational)</div>
+          <div class="card-desc">A CLI tool that checks a target URL for common vulnerabilities — XSS, SQL injection, missing security headers — demonstrating hands-on OWASP Top 10 knowledge.</div>
+          <div class="card-tools">
+            <span class="tool-chip">Python</span>
+            <span class="tool-chip">OWASP</span>
+            <span class="tool-chip">Requests</span>
+            <span class="tool-chip">BeautifulSoup</span>
+          </div>
+          <div class="card-dev-links"></div>
+        </div>
+
+        <!-- Suggested project 3 -->
+        <div class="project-card sec"
+             data-live=""
+             data-video=""
+             data-title="CTF Write-Ups & Hacking Lab Docs">
+          <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
+          <div class="card-meta"><span class="card-type sec-type">[ suggestion ]</span><span class="card-year">—</span></div>
+          <div class="card-title">CTF Write-Ups &amp; Hacking Lab Docs</div>
+          <div class="card-desc">Public write-ups of CTF challenges from HackTheBox and TryHackMe — documenting problem-solving process and technical depth for security teams and recruiters.</div>
+          <div class="card-tools">
+            <span class="tool-chip">HackTheBox</span>
+            <span class="tool-chip">TryHackMe</span>
+            <span class="tool-chip">Linux</span>
+            <span class="tool-chip">Writeups</span>
+          </div>
+          <div class="card-dev-links"></div>
+        </div>
+
+        <!-- Suggested project 4 -->
+        <div class="project-card sec"
+             data-live=""
+             data-video=""
+             data-title="Password Strength Auditor with Breach Check">
+          <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
+          <div class="card-meta"><span class="card-type sec-type">[ suggestion ]</span><span class="card-year">—</span></div>
+          <div class="card-title">Password Strength Auditor with Breach Check</div>
+          <div class="card-desc">A web app that evaluates password entropy and checks against HaveIBeenPwned via k-anonymity — no raw passwords sent, clean frontend, security-aware backend.</div>
+          <div class="card-tools">
+            <span class="tool-chip">React</span>
+            <span class="tool-chip">HaveIBeenPwned API</span>
+            <span class="tool-chip">Cryptography</span>
+            <span class="tool-chip">Node.js</span>
+          </div>
+          <div class="card-dev-links"></div>
+        </div>
+
+      </div>
+
+      <div class="security-note">
+        <span class="sec-note-label">// note</span>
+        <span>Titles above are project suggestions — replace this label with the actual project once built and add your Live App / Video Demo links.</span>
+      </div>
 
     </div>
   </section>
@@ -568,22 +383,17 @@
   <section class="section" id="contact">
     <div class="wrap">
       <div class="section-header">
-        <span class="section-num">03</span>
+        <span class="section-num">04</span>
         <span class="section-title">Contact</span>
         <div class="section-line"></div>
       </div>
       <p class="contact-intro">
-        Open to collaboration, freelance projects, and new creative ventures.<br>
-        Let's make something worth looking at.
+        Open to internships, collaboration, freelance projects, and new opportunities.<br>
+        Let's build something useful.
       </p>
       <a class="contact-row" href="mailto:kenettMF15@gmail.com">
         <span class="contact-key">email</span>
         <span>kenettMF15@gmail.com</span>
-        <span class="contact-arrow">↗</span>
-      </a>
-      <a class="contact-row" href="https://instagram.com/kenettfernandez" target="_blank">
-        <span class="contact-key">instagram</span>
-        <span>@kenettfernandez</span>
         <span class="contact-arrow">↗</span>
       </a>
       <a class="contact-row" href="https://github.com/KentMiranda" target="_blank">
@@ -606,7 +416,7 @@
     <footer>
       <span>© 2025 Kenett Fernandez</span>
       <span class="footer-code">// built_with: html + css + js //</span>
-      <span>KF_v2.0</span>
+      <span>KF_v3.0</span>
     </footer>
   </div>
 

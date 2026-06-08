@@ -193,14 +193,11 @@
    6. TAB SWITCHING
 ================================================================ */
 const TAB_PANELS = {
-  photography: 'tab-photography',
-  video:       'tab-video',
-  webdev:      'tab-webdev',
-  uiux:        'tab-uiux',
+  webdev: 'tab-webdev',
+  uiux:   'tab-uiux',
 };
 const TAB_GROUPS = {
-  creative: ['tab-photography', 'tab-video'],
-  dev:      ['tab-webdev', 'tab-uiux'],
+  dev: ['tab-webdev', 'tab-uiux'],
 };
 
 function switchTab(btn) {
@@ -225,146 +222,81 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 
 
 /* ================================================================
-   7. ALBUM SLIDESHOW — Photography
-   Opens a fullscreen slideshow for the clicked album.
-   Each album card has .album-photos > span[data-src, data-title].
+   7. VIDEO MODAL
 ================================================================ */
 (function () {
-  const ss        = document.getElementById('slideshow');
-  const ssImg     = document.getElementById('ssImg');
-  const ssCaption = document.getElementById('ssCaption');
-  const ssCounter = document.getElementById('ssCounter');
-  const ssTitle   = document.getElementById('ssAlbumTitle');
-  const ssDots    = document.getElementById('ssDots');
-  const ssClose   = document.getElementById('ssClose');
-  const ssPrev    = document.getElementById('ssPrev');
-  const ssNext    = document.getElementById('ssNext');
-  if (!ss) return;
+  const modal     = document.getElementById('videoModal');
+  const vmClose   = document.getElementById('vmClose');
+  const vmTitle   = document.getElementById('vmTitle');
+  const vmIframe  = document.getElementById('vmIframe');
+  const vmPH      = document.getElementById('vmPlaceholder');
+  const vmPHText  = document.getElementById('vmPlaceholderText');
+  if (!modal) return;
 
-  let photos  = [];
-  let current = 0;
-
-  function buildDots() {
-    ssDots.innerHTML = '';
-    photos.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.className = 'ss-dot' + (i === current ? ' active' : '');
-      dot.setAttribute('aria-label', `Go to photo ${i + 1}`);
-      dot.addEventListener('click', () => goTo(i));
-      ssDots.appendChild(dot);
-    });
-  }
-
-  function updateDots() {
-    ssDots.querySelectorAll('.ss-dot').forEach((d, i) => {
-      d.classList.toggle('active', i === current);
-    });
-  }
-
-  function goTo(index) {
-    current = index;
-    const photo = photos[current];
-    ssImg.classList.add('loading');
-    ssImg.src = photo.src;
-    ssImg.alt = photo.title;
-    ssImg.onload = () => ssImg.classList.remove('loading');
-    ssCaption.textContent = photo.title;
-    ssCounter.textContent = `${current + 1} / ${photos.length}`;
-    ssPrev.classList.toggle('hidden', current === 0);
-    ssNext.classList.toggle('hidden', current === photos.length - 1);
-    updateDots();
-  }
-
-  function open(albumCard) {
-    const title   = albumCard.querySelector('.album-title').textContent;
-    const spans   = albumCard.querySelectorAll('.album-photos span');
-    photos  = Array.from(spans).map(s => ({ src: s.dataset.src, title: s.dataset.title }));
-    current = 0;
-    ssTitle.textContent = title;
-    buildDots();
-    goTo(0);
-    ss.classList.add('open');
+  function openModal(title, videoUrl) {
+    vmTitle.textContent = title;
+    if (videoUrl) {
+      // Convert YouTube watch URL to embed
+      let embedUrl = videoUrl;
+      const ytMatch = videoUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
+      if (ytMatch) embedUrl = `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1`;
+      vmIframe.src = embedUrl;
+      vmIframe.classList.add('active');
+      vmPH.style.display = 'none';
+    } else {
+      vmIframe.src = '';
+      vmIframe.classList.remove('active');
+      vmPHText.textContent = 'Video demo coming soon';
+      vmPH.style.display = 'flex';
+    }
+    modal.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
-  function close() {
-    ss.classList.remove('open');
+  function closeModal() {
+    modal.classList.remove('open');
+    vmIframe.src = '';
+    vmIframe.classList.remove('active');
     document.body.style.overflow = '';
-    setTimeout(() => { ssImg.src = ''; }, 300);
   }
 
-  ssClose.addEventListener('click', close);
-  ss.addEventListener('click', e => { if (e.target === ss) close(); });
-  ssPrev.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
-  ssNext.addEventListener('click', () => { if (current < photos.length - 1) goTo(current + 1); });
+  vmClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  document.addEventListener('keydown', e => {
-    if (!ss.classList.contains('open')) return;
-    if (e.key === 'Escape')      close();
-    if (e.key === 'ArrowLeft'  && current > 0)                  goTo(current - 1);
-    if (e.key === 'ArrowRight' && current < photos.length - 1)  goTo(current + 1);
-  });
-
-  /* Attach click to every album card */
-  document.querySelectorAll('.album-card').forEach(card => {
-    card.addEventListener('click', () => open(card));
-
-    /* Show photo count on the card */
-    const count   = card.querySelectorAll('.album-photos span').length;
-    const albumId = card.dataset.album;
-    const countEl = document.getElementById(`count-${albumId}`);
-    if (countEl) countEl.textContent = `${count} photo${count !== 1 ? 's' : ''}`;
-  });
+  window.__openVideoModal = openModal;
 })();
 
 
 /* ================================================================
-   8. VIDEO HOVER PREVIEW
+   8. DEV CARD LINKS — Live App + Video Demo buttons
 ================================================================ */
-document.querySelectorAll('.video-card').forEach(card => {
-  const video = card.querySelector('.card-video-preview');
-  const link  = card.dataset.link;
-
-  if (video) {
-    card.addEventListener('mouseenter', () => {
-      video.currentTime = 0;
-      video.play().catch(() => {});
-    });
-    card.addEventListener('mouseleave', () => {
-      video.pause();
-      video.currentTime = 0;
-    });
-  }
-
-  if (link) {
-    card.addEventListener('click', () => {
-      window.open(link, '_blank', 'noopener,noreferrer');
-    });
-  }
-});
-
-
-/* ================================================================
-   9. DEV CARD LINKS
-================================================================ */
-document.querySelectorAll('.project-card.dev').forEach(card => {
-  const liveUrl   = card.dataset.live;
-  const githubUrl = card.dataset.github;
+document.querySelectorAll('.project-card').forEach(card => {
+  const liveUrl  = card.dataset.live;
+  const videoUrl = card.dataset.video; // can be empty string = "coming soon"
+  const title    = card.dataset.title || 'Project';
   const container = card.querySelector('.card-dev-links');
   if (!container) return;
 
+  // Live App button — only show if URL is set
   if (liveUrl) {
     const a = document.createElement('a');
     a.href = liveUrl; a.target = '_blank'; a.rel = 'noopener noreferrer';
-    a.className = 'dev-btn dev-btn--live'; a.textContent = 'Live ↗';
+    a.className = 'dev-btn dev-btn--live';
+    a.innerHTML = '↗ Live App';
     container.appendChild(a);
   }
 
-  if (githubUrl) {
-    const a = document.createElement('a');
-    a.href = githubUrl; a.target = '_blank'; a.rel = 'noopener noreferrer';
-    a.className = 'dev-btn dev-btn--gh'; a.textContent = 'GitHub ↗';
-    container.appendChild(a);
+  // Video Demo button — always show for dev/sec cards that have data-video attr
+  if (card.hasAttribute('data-video')) {
+    const btn = document.createElement('button');
+    btn.className = 'dev-btn dev-btn--video';
+    btn.innerHTML = '▶ Video Demo';
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      if (window.__openVideoModal) window.__openVideoModal(title, videoUrl);
+    });
+    container.appendChild(btn);
   }
 
   container.querySelectorAll('.dev-btn').forEach(btn => {
@@ -462,7 +394,21 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(this.getAttribute('href'));
     if (target) {
       e.preventDefault();
+      // Close mobile nav if open
+      document.getElementById('navLinks')?.classList.remove('open');
       target.scrollIntoView({ behavior: 'smooth' });
     }
   });
 });
+
+/* ================================================================
+   14. MOBILE NAV HAMBURGER
+================================================================ */
+(function () {
+  const btn   = document.getElementById('navHamburger');
+  const links = document.getElementById('navLinks');
+  if (!btn || !links) return;
+  btn.addEventListener('click', () => {
+    links.classList.toggle('open');
+  });
+})();
