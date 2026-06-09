@@ -402,6 +402,30 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 /* ================================================================
+   15. WIP OVERLAY INJECTION
+   Injects a hover overlay on all project cards with data-wip attr
+================================================================ */
+(function () {
+  document.querySelectorAll('.project-card[data-wip]').forEach(card => {
+    const overlay = document.createElement('div');
+    overlay.className = 'wip-overlay';
+    overlay.innerHTML = `
+      <span class="wip-overlay-icon">[ ! ]</span>
+      <span class="wip-overlay-text">In Development</span>
+      <span class="wip-overlay-sub">// not yet live</span>
+    `;
+    card.appendChild(overlay);
+  });
+})();
+(function () {
+  const btn   = document.getElementById('navHamburger');
+  const links = document.getElementById('navLinks');
+  if (!btn || !links) return;
+  btn.addEventListener('click', () => {
+    links.classList.toggle('open');
+  });
+})();
+/* ================================================================
    14. MOBILE NAV HAMBURGER
 ================================================================ */
 (function () {
