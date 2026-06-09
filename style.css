@@ -653,6 +653,89 @@ footer { padding: 1.5rem 0 2rem; font-size: 10px; color: var(--muted); display: 
 
 
 /* ================================================================
+   19b. WIP (IN DEVELOPMENT) OVERLAY
+================================================================ */
+.card-title-duh {
+  font-size: 10px;
+  color: var(--muted2);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+}
+
+.project-card[data-wip] {
+  position: relative;
+}
+
+/* The overlay itself — hidden by default */
+.project-card[data-wip] .wip-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 18, 16, 0.82);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.project-card[data-wip]:hover .wip-overlay {
+  opacity: 1;
+}
+
+/* Scanline texture on the overlay */
+.project-card[data-wip] .wip-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.18) 3px,
+    rgba(0,0,0,0.18) 4px
+  );
+  pointer-events: none;
+}
+
+.wip-overlay-icon {
+  font-size: 13px;
+  color: #C8FF00;
+  opacity: 0.7;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-family: var(--mono);
+  position: relative;
+  z-index: 1;
+}
+
+.wip-overlay-text {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: var(--mono);
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+
+.wip-overlay-sub {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.12em;
+  font-family: var(--mono);
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ================================================================
    20. MEDIA QUERIES
 ================================================================ */
 /* Hamburger — hidden on desktop */
