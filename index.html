@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kenett Fernandez — CS Portfolio</title>
-  <meta name="description" content="Computer science student, frontend developer, and cybersecurity enthusiast based in PH." />
+  <title>Kenett Fernandez — Portfolio</title>
+  <meta name="description" content="Frontend Developer & IT Support based in PH." />
   <meta name="author" content="Kenett Fernandez" />
-  <meta property="og:title" content="Kenett Fernandez — CS Portfolio" />
-  <meta property="og:description" content="Frontend developer and cybersecurity learner." />
-  <meta property="og:url" content="https://yoursite.com" />
+  <meta property="og:title" content="Kenett Fernandez — Portfolio" />
+
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 </head>
@@ -24,20 +23,18 @@
   <!-- NOISE OVERLAY -->
   <canvas class="noise-canvas" id="noiseCanvas"></canvas>
 
-  <!-- VIDEO DEMO MODAL -->
-  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Video demo">
-    <div class="vm-inner">
-      <div class="vm-topbar">
-        <span class="vm-title" id="vmTitle"></span>
-        <button class="vm-close" id="vmClose" aria-label="Close video">✕</button>
-      </div>
-      <div class="vm-stage">
-        <div class="vm-placeholder" id="vmPlaceholder">
-          <div class="vm-placeholder-icon">▶</div>
-          <div class="vm-placeholder-text" id="vmPlaceholderText">Video demo coming soon</div>
-          <div class="vm-placeholder-sub">Replace <code>data-video</code> with your YouTube/Drive link</div>
-        </div>
-        <iframe class="vm-iframe" id="vmIframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <!-- ============================================================
+    LIGHTBOX OVERLAY
+  ============================================================ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+    <button class="lb-prev"  id="lbPrev"  aria-label="Previous photo">←</button>
+    <button class="lb-next"  id="lbNext"  aria-label="Next photo">→</button>
+    <div class="lb-inner">
+      <img class="lb-img" id="lbImg" src="" alt="" />
+      <div class="lb-caption">
+        <span class="lb-title"   id="lbTitle"></span>
+        <span class="lb-counter" id="lbCounter"></span>
       </div>
     </div>
   </div>
@@ -52,15 +49,11 @@
       <div class="nav-center">
         <span class="nav-clock" id="navClock"></span>
       </div>
-      <div class="nav-links" id="navLinks">
+      <div class="nav-links">
         <a href="#about">about</a>
         <a href="#work">work</a>
-        <a href="#security">security</a>
         <a href="#contact">contact</a>
       </div>
-      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
     </div>
   </nav>
 
@@ -70,34 +63,30 @@
   ============================================================ -->
   <section class="hero">
     <div class="wrap">
-      <div class="hero-label">CS Portfolio — 2025</div>
+      <div class="hero-label">Portfolio — 2025</div>
       <h1 class="hero-name">
         <span class="scramble-text" data-text="Kenett">Kenett</span><br>
         <span class="accent scramble-text" data-text="Fernandez">Fernandez</span><span class="cursor"></span>
       </h1>
-      <p class="hero-sub">/ computer science student — frontend dev — cybersecurity learner /</p>
+      <p class="hero-sub">/ Frontend Developer — IT Support — Systems & Cybersecurity /</p>
       <div class="hero-tags">
-        <span class="tag">Frontend Dev</span>
-        <span class="tag">UI / UX</span>
-        <span class="tag">React</span>
-        <span class="tag">Cybersecurity</span>
         <span class="tag">Web Dev</span>
+        <span class="tag">UI / UX</span>
+        <span class="tag">Cybersecurity</span>
       </div>
       <div class="status-line">
         <span class="status-dot"></span>
-        <span>Open to opportunities</span>
+        <span>Available for freelance work</span>
         <span class="divider">//</span>
         <span>Based in PH</span>
       </div>
-      <div class="hero-cta">
-        <a href="Kenett_Fernandez_Resume.pdf" class="hero-resume-btn" download>↓ Download Resume</a>
-      </div>
       <div class="hero-deco" aria-hidden="true">
         <span class="hero-deco-line"></span>
-        <span class="hero-deco-text">EST. 2022 // BUILDING DIGITAL SYSTEMS</span>
+        <span class="hero-deco-text">EST. 2022 // VISUAL SYSTEMS</span>
         <span class="hero-deco-line"></span>
       </div>
     </div>
+    <!-- corner brackets -->
     <span class="corner corner--tl" aria-hidden="true"></span>
     <span class="corner corner--tr" aria-hidden="true"></span>
     <span class="corner corner--bl" aria-hidden="true"></span>
@@ -117,15 +106,13 @@
       </div>
       <div class="about-grid">
         <div class="about-text">
-          <p>I'm Kenett — a computer science student based in the Philippines with a focus on frontend development and an active interest in cybersecurity.</p>
-          <p>I've collaborated on real-world systems like an internship management platform, built a full web presence for a small business, and I'm currently deepening my skills in network security and ethical hacking.</p>
-          <p>I believe in writing clean, purposeful code and building things that actually work for real people.</p>
+          <p>I'm Kenett — a Computer Science student passionate about building things that are both functional and well-crafted.</p>
+          <p>From frontend interfaces to network security labs, I like working across the stack — writing clean code, breaking systems to understand them, and building tools that actually solve problems.</p>
+          <p>Currently deepening my focus in cybersecurity and web development, with a strong interest in network forensics, vulnerability assessment, and modern frontend engineering.</p>
         </div>
         <div class="about-stats">
-          <div class="stat-cell"><div class="stat-num" data-target="3">0</div><div class="stat-label">Years coding</div></div>
-          <div class="stat-cell"><div class="stat-num" data-target="8">0</div><div class="stat-label">Projects built</div></div>
-          <div class="stat-cell"><div class="stat-num" data-target="2">0</div><div class="stat-label">Team projects</div></div>
-          <div class="stat-cell"><div class="stat-num infinity">∞</div><div class="stat-label">Things to learn</div></div>
+          <div class="stat-cell"><div class="stat-num" data-target="3">3</div><div class="stat-label">Web projects</div></div>
+          <div class="stat-cell"><div class="stat-num">∞</div><div class="stat-label">Ideas brewing</div></div>
         </div>
       </div>
     </div>
@@ -143,9 +130,10 @@
         <div class="section-line"></div>
       </div>
 
-      <!-- ── FRONTEND / WEB DEV ─────────────────────────────── -->
+
+      <!-- ── DEV WORK ────────────────────────────────────────────── -->
       <div class="work-group">
-        <div class="group-label accent2">// Frontend &amp; Web Dev</div>
+        <div class="group-label accent2">// Dev Work</div>
 
         <div class="tabs" id="dev-tabs">
           <button class="tab-btn active" data-group="dev" data-tab="webdev">Web Dev</button>
@@ -156,52 +144,52 @@
         <div class="tab-panel active" id="tab-webdev">
           <div class="project-grid">
 
-            <!-- Internship Management System -->
+            <!-- LIVE — Internship Management System -->
             <div class="project-card dev"
-                 data-live=""
-                 data-video=""
-                 data-title="Internship Management System">
-              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta"><span class="card-type accent2">Team Project</span><span class="card-year">2025</span></div>
-              <div class="card-title">Internship Management System</div>
-              <div class="card-desc">A full-stack web application developed collaboratively with groupmates as a college subject project. Handles student internship tracking, company coordination, supervisor monitoring, and report submissions — streamlining the OJT process end-to-end.</div>
-              <div class="card-tools">
-                <span class="tool-chip">React</span>
-                <span class="tool-chip">Node.js</span>
-                <span class="tool-chip">MySQL</span>
-                <span class="tool-chip">Tailwind</span>
-              </div>
-              <div class="card-dev-links"></div>
-            </div>
-
-            <!-- Wood Engraving Business Website -->
-            <div class="project-card dev"
-                 data-live=""
-                 data-video=""
-                 data-title="Wood Engraving Business Website">
-              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta"><span class="card-type accent2">Freelance</span><span class="card-year">2025</span></div>
-              <div class="card-title">Wood Engraving Business Website</div>
-              <div class="card-desc">A business website built for my auntie's wood engraving venture. Features a product gallery, custom order form, and mobile-friendly layout — giving the business a clean online presence to reach more customers.</div>
-              <div class="card-tools">
-                <span class="tool-chip">HTML</span>
-                <span class="tool-chip">CSS</span>
-                <span class="tool-chip">JavaScript</span>
-                <span class="tool-chip">Responsive</span>
-              </div>
-              <div class="card-dev-links"></div>
-            </div>
-
-            <!-- This Portfolio -->
-            <div class="project-card dev"
-                 data-live="https://kenett-portfolio.vercel.app"
-                 data-video=""
-                 data-title="This Portfolio"
-                 data-wip>
+                 data-live="https://your-internship-system.vercel.app"
+                 data-github="https://github.com/KentMiranda/internship-management">
               <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
               <div class="card-meta"><span class="card-type accent2">Web Dev</span><span class="card-year">2025</span></div>
-              <div class="card-title">This Portfolio <span class="card-title-duh">(duh!)</span></div>
-              <div class="card-desc">Built from scratch with vanilla HTML, CSS, and JS. ASCII-inspired terminal aesthetic, minimal, dark — fully responsive with custom cursor and text scramble effects.</div>
+              <div class="card-title">Internship Management System</div>
+              <div class="card-desc">A student-friendly internship dashboard built with React and Tailwind CSS. Responsible for the full frontend — UI/UX design, component architecture, and API integration with the backend team.</div>
+              <div class="card-tools">
+                <span class="tool-chip">React</span>
+                <span class="tool-chip">Tailwind CSS</span>
+                <span class="tool-chip">Figma</span>
+                <span class="tool-chip">REST API</span>
+              </div>
+              <div class="card-dev-links"></div>
+            </div>
+
+            <!-- LIVE — This Portfolio (duh) -->
+            <div class="project-card dev"
+                 data-live="https://kenett-portfolio.vercel.app"
+                 data-github="https://github.com/KentMiranda/kenett-portfolio">
+              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
+              <div class="card-meta"><span class="card-type accent2">Web Dev</span><span class="card-year">2025</span></div>
+              <div class="card-title">This Portfolio <span class="card-title-aside">(duh)</span></div>
+              <div class="card-desc">Built from scratch with vanilla HTML, CSS, and JS. Custom cursor, scroll animations, live clock, text scramble — no frameworks, no shortcuts.</div>
+              <div class="card-tools">
+                <span class="tool-chip">HTML</span>
+                <span class="tool-chip">CSS</span>
+                <span class="tool-chip">JavaScript</span>
+                <span class="tool-chip">Vercel</span>
+              </div>
+              <div class="card-dev-links"></div>
+            </div>
+
+            <!-- WIP — Wood Engraving Website -->
+            <div class="project-card dev wip"
+                 data-live="https://your-engraving-site.vercel.app"
+                 data-github="https://github.com/KentMiranda/engraving-website">
+              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
+              <div class="wip-overlay" aria-hidden="true">
+                <span class="wip-label">// work in progress</span>
+                <span class="wip-bar"></span>
+              </div>
+              <div class="card-meta"><span class="card-type accent2">Web Dev</span><span class="card-year">2025</span></div>
+              <div class="card-title">Bits&Finds (Wood Engraving Co.)</div>
+              <div class="card-desc">A product showcase and inquiry site for a local wood engraving business. Clean, minimal design with a warm aesthetic to match the craft.</div>
               <div class="card-tools">
                 <span class="tool-chip">HTML</span>
                 <span class="tool-chip">CSS</span>
@@ -210,172 +198,180 @@
               <div class="card-dev-links"></div>
             </div>
 
-            <div class="project-card dev"
-                 data-live=""
-                 data-video=""
-                 data-title="Local Biz Dashboard"
-                 data-wip>
-              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta"><span class="card-type accent2">Web Dev</span><span class="card-year">2024</span></div>
-              <div class="card-title">Local Biz Dashboard</div>
-              <div class="card-desc">Admin dashboard for a small business to track orders, inventory, and sales data visualizations.</div>
-              <div class="card-tools">
-                <span class="tool-chip">React</span>
-                <span class="tool-chip">Chart.js</span>
-                <span class="tool-chip">Firebase</span>
-              </div>
-              <div class="card-dev-links"></div>
-            </div>
+            <!-- COMING SOON -->
+
 
           </div>
         </div><!-- /tab-webdev -->
+
 
         <!-- UI/UX TAB -->
         <div class="tab-panel" id="tab-uiux">
           <div class="project-grid">
 
+            <!-- LIVE — Internship Dashboard UI/UX -->
             <div class="project-card dev"
                  data-live="https://figma.com/proto/YOUR_LINK"
-                 data-video=""
-                 data-title="Creative Studio App Design"
-                 data-wip>
+                 data-github="">
               <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
               <div class="card-meta"><span class="card-type accent2">UI / UX</span><span class="card-year">2025</span></div>
-              <div class="card-title">Creative Studio App Design</div>
-              <div class="card-desc">End-to-end Figma design for a creative freelancer app — wireframes to polished component library.</div>
+              <div class="card-title">Internship Dashboard — UI Design</div>
+              <div class="card-desc">Full end-to-end UI/UX for the Internship Management System. Wireframes, component library, and final prototype in Figma before handoff to dev.</div>
               <div class="card-tools">
                 <span class="tool-chip">Figma</span>
+                <span class="tool-chip">Wireframing</span>
                 <span class="tool-chip">Prototyping</span>
                 <span class="tool-chip">Design System</span>
               </div>
               <div class="card-dev-links"></div>
             </div>
 
-            <div class="project-card dev"
-                 data-live="https://figma.com/proto/YOUR_LINK"
-                 data-video=""
-                 data-title="E-Commerce UX Redesign"
-                 data-wip>
+            <!-- COMING SOON -->
+            <div class="project-card dev coming-soon">
               <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-              <div class="card-meta"><span class="card-type accent2">UI / UX</span><span class="card-year">2024</span></div>
-              <div class="card-title">E-Commerce UX Redesign</div>
-              <div class="card-desc">UX audit and redesign of a local e-commerce store's checkout flow, improving conversion and clarity.</div>
-              <div class="card-tools">
-                <span class="tool-chip">Figma</span>
-                <span class="tool-chip">User Research</span>
-                <span class="tool-chip">A/B Testing</span>
-              </div>
-              <div class="card-dev-links"></div>
+              <div class="coming-soon-overlay"><span>[ v2 — loading ]</span></div>
+              <div class="card-meta"><span class="card-type accent2">UI / UX</span><span class="card-year">—</span></div>
+              <div class="card-title">Bits&Finds (Wood Engraving Co.)</div>
+              <div class="card-desc">Design mockups and Figma prototype for the wood engraving business site.</div>
+              <div class="card-tools"><span class="tool-chip">Figma</span></div>
             </div>
 
           </div>
         </div><!-- /tab-uiux -->
 
-      </div><!-- /work-group -->
-
-    </div>
-  </section>
+      </div><!-- /dev work-group -->
 
 
-  <!-- ============================================================
-    CYBERSECURITY SECTION
-  ============================================================ -->
-  <section class="section" id="security">
-    <div class="wrap">
-      <div class="section-header">
-        <span class="section-num">03</span>
-        <span class="section-title">Cybersecurity</span>
-        <div class="section-line"></div>
-      </div>
+      <!-- ── CYBERSECURITY ───────────────────────────────────────── -->
+      <div class="work-group">
+        <div class="group-label" style="color:#435f1cec;">// Cybersecurity</div>
 
-      <div class="security-intro">
-        <p>Alongside frontend development, I'm actively building skills in cybersecurity — studying network fundamentals, ethical hacking concepts, and secure coding practices. The projects below are what I'm working toward to demonstrate these abilities.</p>
-        <div class="security-badge">
-          <span class="status-dot"></span>
-          <span>[ currently developing ]</span>
+        <div class="tabs" id="sec-tabs">
+          <button class="tab-btn active" data-group="sec" data-tab="secprojects">Projects</button>
+          <button class="tab-btn"        data-group="sec" data-tab="secskills">Skills &amp; Tools</button>
         </div>
-      </div>
 
-      <div class="project-grid">
+        <!-- SECURITY PROJECTS TAB -->
+        <div class="tab-panel active" id="tab-secprojects">
+          <div class="project-grid">
 
-        <!-- Suggested project 1 -->
-        <div class="project-card sec"
-             data-live=""
-             data-video=""
-             data-title="Network Packet Analyzer & Visualizer">
-          <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-          <div class="card-meta"><span class="card-type sec-type">[ suggestion ]</span><span class="card-year">—</span></div>
-          <div class="card-title">Network Packet Analyzer &amp; Visualizer</div>
-          <div class="card-desc">A Python tool using Scapy to capture, parse, and visualize network traffic — with a React dashboard showing protocol breakdown and live packet flow.</div>
-          <div class="card-tools">
-            <span class="tool-chip">Python</span>
-            <span class="tool-chip">Scapy</span>
-            <span class="tool-chip">React</span>
-            <span class="tool-chip">Networking</span>
+            <!-- WIP — Packet Analyzer -->
+            <div class="project-card sec wip"
+                 data-live=""
+                 data-github="https://github.com/KentMiranda/packet-analyzer">
+              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
+              <div class="wip-overlay" aria-hidden="true">
+                <span class="wip-label">// work in progress</span>
+                <span class="wip-bar"></span>
+              </div>
+              <div class="card-meta"><span class="card-type" style="color:#435f1cec;">Cybersec</span><span class="card-year">2025</span></div>
+              <div class="card-title">Packet Analyzer</div>
+              <div class="card-desc">A Python-based network packet analyzer built to capture and inspect live traffic. Filters by protocol (TCP, UDP, ICMP), displays source/destination IPs, ports, and payload previews — built for learning network forensics and traffic analysis.</div>
+              <div class="card-tools">
+                <span class="tool-chip">Python</span>
+                <span class="tool-chip">Scapy</span>
+                <span class="tool-chip">Linux</span>
+                <span class="tool-chip">Wireshark</span>
+                <span class="tool-chip">Network Forensics</span>
+              </div>
+              <div class="card-dev-links"></div>
+            </div>
+
+            <!-- WIP — Home Network Security Assessment -->
+            <div class="project-card sec wip"
+                 data-live=""
+                 data-github="https://github.com/KentMiranda/network-security-assessment">
+              <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
+              <div class="wip-overlay" aria-hidden="true">
+                <span class="wip-label">// work in progress</span>
+                <span class="wip-bar"></span>
+              </div>
+              <div class="card-meta"><span class="card-type" style="color:#435f1cec;">Cybersec</span><span class="card-year">2025</span></div>
+              <div class="card-title">Home Network Security Assessment</div>
+              <div class="card-desc">Set up a virtual lab simulating a local network. Used Nmap for port scanning and host discovery, identified unnecessary open ports and misconfigurations, and documented remediation steps.</div>
+              <div class="card-tools">
+                <span class="tool-chip">Nmap</span>
+                <span class="tool-chip">Linux</span>
+                <span class="tool-chip">VirtualBox</span>
+                <span class="tool-chip">Kali Linux</span>
+                <span class="tool-chip">Network Recon</span>
+              </div>
+              <div class="card-dev-links"></div>
+            </div>
+
+
+
           </div>
-          <div class="card-dev-links"></div>
-        </div>
+        </div><!-- /tab-secprojects -->
 
-        <!-- Suggested project 2 -->
-        <div class="project-card sec"
-             data-live=""
-             data-video=""
-             data-title="Web Vulnerability Scanner (Educational)"
-             data-wip>
-          <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-          <div class="card-meta"><span class="card-type sec-type">[ suggestion ]</span><span class="card-year">—</span></div>
-          <div class="card-title">Web Vulnerability Scanner (Educational)</div>
-          <div class="card-desc">A CLI tool that checks a target URL for common vulnerabilities — XSS, SQL injection, missing security headers — demonstrating hands-on OWASP Top 10 knowledge.</div>
-          <div class="card-tools">
-            <span class="tool-chip">Python</span>
-            <span class="tool-chip">OWASP</span>
-            <span class="tool-chip">Requests</span>
-            <span class="tool-chip">BeautifulSoup</span>
+
+        <!-- SKILLS & TOOLS TAB -->
+        <div class="tab-panel" id="tab-secskills">
+          <div class="sec-skills-grid">
+
+            <div class="sec-skill-cell">
+              <div class="sec-skill-label">Network Recon</div>
+              <div class="sec-skill-tools">
+                <span class="tool-chip">Nmap</span>
+                <span class="tool-chip">Netcat</span>
+                <span class="tool-chip">Traceroute</span>
+              </div>
+              <div class="sec-skill-desc">Port scanning, host discovery, service enumeration, OS fingerprinting.</div>
+            </div>
+
+            <div class="sec-skill-cell">
+              <div class="sec-skill-label">Traffic Analysis</div>
+              <div class="sec-skill-tools">
+                <span class="tool-chip">Wireshark</span>
+                <span class="tool-chip">Scapy</span>
+                <span class="tool-chip">tcpdump</span>
+              </div>
+              <div class="sec-skill-desc">Packet capture, protocol dissection, anomaly detection in network traffic.</div>
+            </div>
+
+            <div class="sec-skill-cell">
+              <div class="sec-skill-label">Exploitation</div>
+              <div class="sec-skill-tools">
+                <span class="tool-chip">Metasploit</span>
+                <span class="tool-chip">Burp Suite</span>
+                <span class="tool-chip">SQLmap</span>
+              </div>
+              <div class="sec-skill-desc">Vulnerability scanning, exploitation frameworks, web app security testing.</div>
+            </div>
+
+            <div class="sec-skill-cell">
+              <div class="sec-skill-label">Operating Systems</div>
+              <div class="sec-skill-tools">
+                <span class="tool-chip">Kali Linux</span>
+                <span class="tool-chip">Ubuntu</span>
+                <span class="tool-chip">Windows</span>
+              </div>
+              <div class="sec-skill-desc">Comfortable working in Linux CLI environments for security tooling and scripting.</div>
+            </div>
+
+            <div class="sec-skill-cell">
+              <div class="sec-skill-label">Scripting</div>
+              <div class="sec-skill-tools">
+                <span class="tool-chip">Python</span>
+                <span class="tool-chip">Bash</span>
+                <span class="tool-chip">C++</span>
+              </div>
+              <div class="sec-skill-desc">Automating recon tasks, writing custom tools, scripting exploits.</div>
+            </div>
+
+            <div class="sec-skill-cell">
+              <div class="sec-skill-label">Virtualization</div>
+              <div class="sec-skill-tools">
+                <span class="tool-chip">VirtualBox</span>
+                <span class="tool-chip">VMware</span>
+              </div>
+              <div class="sec-skill-desc">Setting up isolated lab environments for safe security testing and malware analysis.</div>
+            </div>
+
           </div>
-          <div class="card-dev-links"></div>
-        </div>
+        </div><!-- /tab-secskills -->
 
-        <!-- Suggested project 3 -->
-        <div class="project-card sec"
-             data-live=""
-             data-video=""
-             data-title="CTF Write-Ups & Hacking Lab Docs"
-             data-wip>
-          <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-          <div class="card-meta"><span class="card-type sec-type">[ suggestion ]</span><span class="card-year">—</span></div>
-          <div class="card-title">CTF Write-Ups &amp; Hacking Lab Docs</div>
-          <div class="card-desc">Public write-ups of CTF challenges from HackTheBox and TryHackMe — documenting problem-solving process and technical depth for security teams and recruiters.</div>
-          <div class="card-tools">
-            <span class="tool-chip">HackTheBox</span>
-            <span class="tool-chip">TryHackMe</span>
-            <span class="tool-chip">Linux</span>
-            <span class="tool-chip">Writeups</span>
-          </div>
-          <div class="card-dev-links"></div>
-        </div>
-
-        <!-- Suggested project 4 -->
-        <div class="project-card sec"
-             data-live=""
-             data-video=""
-             data-title="Password Strength Auditor with Breach Check"
-             data-wip>
-          <div class="card-brackets" aria-hidden="true"><span>╔</span><span>╗</span><span>╚</span><span>╝</span></div>
-          <div class="card-meta"><span class="card-type sec-type">[ suggestion ]</span><span class="card-year">—</span></div>
-          <div class="card-title">Password Strength Auditor with Breach Check</div>
-          <div class="card-desc">A web app that evaluates password entropy and checks against HaveIBeenPwned via k-anonymity — no raw passwords sent, clean frontend, security-aware backend.</div>
-          <div class="card-tools">
-            <span class="tool-chip">React</span>
-            <span class="tool-chip">HaveIBeenPwned API</span>
-            <span class="tool-chip">Cryptography</span>
-            <span class="tool-chip">Node.js</span>
-          </div>
-          <div class="card-dev-links"></div>
-        </div>
-
-      </div>
-
-      
+      </div><!-- /cybersec work-group -->
 
     </div>
   </section>
@@ -387,17 +383,22 @@
   <section class="section" id="contact">
     <div class="wrap">
       <div class="section-header">
-        <span class="section-num">04</span>
+        <span class="section-num">03</span>
         <span class="section-title">Contact</span>
         <div class="section-line"></div>
       </div>
       <p class="contact-intro">
-        Open to internships, collaboration, freelance projects, and new opportunities.<br>
-        Let's build something useful.
+        Open to collaboration, freelance projects, and new creative ventures.<br>
+        Let's make something worth looking at.
       </p>
       <a class="contact-row" href="mailto:kenettMF15@gmail.com">
         <span class="contact-key">email</span>
         <span>kenettMF15@gmail.com</span>
+        <span class="contact-arrow">↗</span>
+      </a>
+      <a class="contact-row" href="https://instagram.com/kenettfernandez" target="_blank">
+        <span class="contact-key">instagram</span>
+        <span>@kenettfernandez</span>
         <span class="contact-arrow">↗</span>
       </a>
       <a class="contact-row" href="https://github.com/KentMiranda" target="_blank">
@@ -420,7 +421,7 @@
     <footer>
       <span>© 2025 Kenett Fernandez</span>
       <span class="footer-code">// built_with: html + css + js //</span>
-      <span>KF_v3.0</span>
+      <span>KF_v2.0</span>
     </footer>
   </div>
 

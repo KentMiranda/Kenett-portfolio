@@ -193,11 +193,14 @@
    6. TAB SWITCHING
 ================================================================ */
 const TAB_PANELS = {
-  webdev: 'tab-webdev',
-  uiux:   'tab-uiux',
+  webdev:      'tab-webdev',
+  uiux:        'tab-uiux',
+  secprojects: 'tab-secprojects',
+  secskills:   'tab-secskills',
 };
 const TAB_GROUPS = {
   dev: ['tab-webdev', 'tab-uiux'],
+  sec: ['tab-secprojects', 'tab-secskills'],
 };
 
 function switchTab(btn) {
@@ -222,81 +225,122 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 
 
 /* ================================================================
-   7. VIDEO MODAL
+   7. LIGHTBOX — Photography
 ================================================================ */
-(function () {
-  const modal     = document.getElementById('videoModal');
-  const vmClose   = document.getElementById('vmClose');
-  const vmTitle   = document.getElementById('vmTitle');
-  const vmIframe  = document.getElementById('vmIframe');
-  const vmPH      = document.getElementById('vmPlaceholder');
-  const vmPHText  = document.getElementById('vmPlaceholderText');
-  if (!modal) return;
+const lightbox  = document.getElementById('lightbox');
+const lbImg     = document.getElementById('lbImg');
+const lbTitle   = document.getElementById('lbTitle');
+const lbCounter = document.getElementById('lbCounter');
+const lbClose   = document.getElementById('lbClose');
+const lbPrev    = document.getElementById('lbPrev');
+const lbNext    = document.getElementById('lbNext');
 
-  function openModal(title, videoUrl) {
-    vmTitle.textContent = title;
-    if (videoUrl) {
-      // Convert YouTube watch URL to embed
-      let embedUrl = videoUrl;
-      const ytMatch = videoUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
-      if (ytMatch) embedUrl = `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1`;
-      vmIframe.src = embedUrl;
-      vmIframe.classList.add('active');
-      vmPH.style.display = 'none';
-    } else {
-      vmIframe.src = '';
-      vmIframe.classList.remove('active');
-      vmPHText.textContent = 'Video demo coming soon';
-      vmPH.style.display = 'flex';
-    }
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
+let lbPhotos = [];
+let lbIndex  = 0;
 
-  function closeModal() {
-    modal.classList.remove('open');
-    vmIframe.src = '';
-    vmIframe.classList.remove('active');
-    document.body.style.overflow = '';
-  }
+function buildPhotoList(group, firstSrc, firstTitle) {
+  const photos = [{ src: firstSrc, title: firstTitle }];
+  document.querySelectorAll(`.lb-extras [data-group="${group}"]`).forEach(el => {
+    photos.push({ src: el.dataset.src, title: el.dataset.title });
+  });
+  return photos;
+}
 
-  vmClose.addEventListener('click', closeModal);
-  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+function openLightbox(photos, startIndex) {
+  lbPhotos = photos;
+  lbIndex  = startIndex;
+  showPhoto(lbIndex);
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
 
-  window.__openVideoModal = openModal;
-})();
+function showPhoto(index) {
+  const photo = lbPhotos[index];
+  lbImg.classList.add('loading');
+  lbImg.src = photo.src;
+  lbImg.alt = photo.title;
+  lbImg.onload = () => lbImg.classList.remove('loading');
+  lbTitle.textContent   = photo.title;
+  lbCounter.textContent = `${index + 1} / ${lbPhotos.length}`;
+  lbPrev.classList.toggle('hidden', index === 0);
+  lbNext.classList.toggle('hidden', index === lbPhotos.length - 1);
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+  setTimeout(() => { lbImg.src = ''; }, 300);
+}
+
+lbClose.addEventListener('click', closeLightbox);
+lbPrev.addEventListener('click', () => { if (lbIndex > 0) showPhoto(--lbIndex); });
+lbNext.addEventListener('click', () => { if (lbIndex < lbPhotos.length - 1) showPhoto(++lbIndex); });
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape')      closeLightbox();
+  if (e.key === 'ArrowLeft'  && lbIndex > 0)                   showPhoto(--lbIndex);
+  if (e.key === 'ArrowRight' && lbIndex < lbPhotos.length - 1) showPhoto(++lbIndex);
+});
+
+document.querySelectorAll('.photo-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const group  = card.dataset.group;
+    const src    = card.dataset.src;
+    const title  = card.dataset.title;
+    openLightbox(buildPhotoList(group, src, title), 0);
+  });
+});
 
 
 /* ================================================================
-   8. DEV CARD LINKS — Live App + Video Demo buttons
+   8. VIDEO HOVER PREVIEW
 ================================================================ */
-document.querySelectorAll('.project-card').forEach(card => {
-  const liveUrl  = card.dataset.live;
-  const videoUrl = card.dataset.video; // can be empty string = "coming soon"
-  const title    = card.dataset.title || 'Project';
+document.querySelectorAll('.video-card').forEach(card => {
+  const video = card.querySelector('.card-video-preview');
+  const link  = card.dataset.link;
+
+  if (video) {
+    card.addEventListener('mouseenter', () => {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
+    card.addEventListener('mouseleave', () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  }
+
+  if (link) {
+    card.addEventListener('click', () => {
+      window.open(link, '_blank', 'noopener,noreferrer');
+    });
+  }
+});
+
+
+/* ================================================================
+   9. DEV CARD LINKS
+================================================================ */
+document.querySelectorAll('.project-card.dev').forEach(card => {
+  const liveUrl   = card.dataset.live;
+  const githubUrl = card.dataset.github;
   const container = card.querySelector('.card-dev-links');
   if (!container) return;
 
-  // Live App button — only show if URL is set
   if (liveUrl) {
     const a = document.createElement('a');
     a.href = liveUrl; a.target = '_blank'; a.rel = 'noopener noreferrer';
-    a.className = 'dev-btn dev-btn--live';
-    a.innerHTML = '↗ Live App';
+    a.className = 'dev-btn dev-btn--live'; a.textContent = 'Live ↗';
     container.appendChild(a);
   }
 
-  // Video Demo button — always show for dev/sec cards that have data-video attr
-  if (card.hasAttribute('data-video')) {
-    const btn = document.createElement('button');
-    btn.className = 'dev-btn dev-btn--video';
-    btn.innerHTML = '▶ Video Demo';
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      if (window.__openVideoModal) window.__openVideoModal(title, videoUrl);
-    });
-    container.appendChild(btn);
+  if (githubUrl) {
+    const a = document.createElement('a');
+    a.href = githubUrl; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    a.className = 'dev-btn dev-btn--gh'; a.textContent = 'GitHub ↗';
+    container.appendChild(a);
   }
 
   container.querySelectorAll('.dev-btn').forEach(btn => {
@@ -394,39 +438,50 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(this.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      // Close mobile nav if open
-      document.getElementById('navLinks')?.classList.remove('open');
       target.scrollIntoView({ behavior: 'smooth' });
     }
   });
 });
 
 /* ================================================================
-   15. WIP OVERLAY INJECTION
-   Injects a hover overlay on all project cards with data-wip attr
+   14. WIP OVERLAY INJECTION
+   Injects [ v2 — loading ] hover overlay on cards with data-wip
 ================================================================ */
 (function () {
   document.querySelectorAll('.project-card[data-wip]').forEach(card => {
     const overlay = document.createElement('div');
     overlay.className = 'wip-overlay';
     overlay.innerHTML = `
-      <span class="wip-overlay-icon">[ ! ]</span>
-      <span class="wip-overlay-text">In Development</span>
+      <span class="wip-overlay-icon">[ v2 — loading ]</span>
       <span class="wip-overlay-sub">// not yet live</span>
     `;
     card.appendChild(overlay);
   });
 })();
-(function () {
-  const btn   = document.getElementById('navHamburger');
-  const links = document.getElementById('navLinks');
-  if (!btn || !links) return;
-  btn.addEventListener('click', () => {
-    links.classList.toggle('open');
-  });
-})();
+
 /* ================================================================
-   14. MOBILE NAV HAMBURGER
+   15. SEC CARD LINKS — GitHub button for cybersec cards
+================================================================ */
+document.querySelectorAll('.project-card.sec').forEach(card => {
+  const githubUrl = card.dataset.github;
+  const container = card.querySelector('.card-dev-links');
+  if (!container) return;
+
+  if (githubUrl) {
+    const a = document.createElement('a');
+    a.href = githubUrl; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    a.className = 'dev-btn dev-btn--gh';
+    a.innerHTML = '↗ GitHub';
+    container.appendChild(a);
+  }
+
+  container.querySelectorAll('.dev-btn').forEach(btn => {
+    btn.addEventListener('click', e => e.stopPropagation());
+  });
+});
+
+/* ================================================================
+   16. MOBILE NAV HAMBURGER
 ================================================================ */
 (function () {
   const btn   = document.getElementById('navHamburger');
