@@ -28,7 +28,7 @@ Just vanilla HTML, CSS, and JavaScript. Every feature you see was written by han
 
 ---
 
-## Code Snippets
+## Code Snippets (the parts I'm actually proud of)
 
 ### 1. Text Scramble Effect
 > Letters randomise through a character set before resolving to the real text on load.
